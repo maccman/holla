@@ -1,3 +1,7 @@
+Rich JavaScript Application
+
+![Screenshot](http://cl.ly/2PNL/content)
+
 # Prerequisites
 
 * Ruby 1.9.2
@@ -10,4 +14,4 @@
 * rake db:setup
 * start redis
 * rails thin server
-* start the Juggernaut server - http://github.com/maccman/juggernaut
+* start the Juggernaut server - http://github].com/maccman/juggernaut
