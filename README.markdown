@@ -1,5 +1,7 @@
 Rich JavaScript Application
 
+Try it out in your browser (Chrome optimized) - [http://getholla.com](http://getholla.com)
+
 ![Screenshot](http://cl.ly/2PNL/content)
 
 # Prerequisites
@@ -14,4 +16,4 @@ Rich JavaScript Application
 * rake db:setup
 * start redis
 * rails thin server
-* start the Juggernaut server - http://github].com/maccman/juggernaut
+* start the Juggernaut server - [http://github.com/maccman/juggernaut](http://github.com/maccman/juggernaut)
