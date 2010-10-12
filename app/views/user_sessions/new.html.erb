@@ -1,0 +1,37 @@
+<%- content_for :head do -%>
+  <%= stylesheet_link_tag "user_sessions" %>
+<%- end -%>
+
+<%- content_for :header do %>
+  <%= link_to "Sign up", new_user_url, :class => "signup" %>
+<%- end -%>
+
+<%- content_for :title do -%>
+ Login
+<%- end -%>
+
+<%= error_messages_for :user_session, :header_message => false, :message => false %>
+
+<%= form_tag(user_sessions_path) do |f| %>  
+  <%= hidden_field_tag :return_to, params[:return_to] %>
+  
+  <label>
+    <span>Email:</span>
+    <%= text_field :user_session, :email, :class => "rounded" %>
+  </label>
+  
+  <label>
+    <span>Password:</span>
+    <%= password_field :user_session, :password, :class => "rounded" %>
+    <div class="forgot"><%= link_to "Forgot password?", forgot_password_user_sessions_path %></div>
+  </label>
+  
+  <label id="remember_me" for="user_session_remember_me">
+    <%= check_box :user_session, :remember_me %>
+    <span>Remember me</span>
+  </label>
+  
+  <footer>
+    <button class="right">Login</button>    
+  </footer>
+<% end %>

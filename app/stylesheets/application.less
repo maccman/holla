@@ -1,0 +1,258 @@
+@import "jquery.ui.css";
+
+@import "utils";
+@import "theme";
+
+body {
+  background: #D2D2D2;
+}
+
+#content {
+  position: absolute;
+  top:    50px; /* Header */
+  right:  0;
+  bottom: 0;
+  left:   0;
+}
+
+#content .wrapper {
+  height: 100%;
+}
+
+#views {
+  overflow: hidden;
+  position: relative;
+  
+  .box-flex(1);
+  .vbox();
+}
+
+#views > *:not(.current) {
+  display: none !important;
+}
+
+#views > * {
+  overflow: auto;
+  .box-flex(1);
+}
+
+#title h1 {
+  line-height: 50px;
+  margin: 0 0 0 10px;
+  float: left;
+}
+
+#title h1 a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+#title .menu {
+  float: right;
+  margin: 15px;  
+}
+
+#title .account, 
+#title .logout {
+  display: block;
+  text-indent: -9000px;
+  height: 21px;
+  width:  21px;
+  float: left;
+  margin-right: 13px;
+}
+
+#title .account {
+  background: url(/images/account.png) no-repeat;
+}
+
+#title .logout {
+  background: url(/images/logout.png) no-repeat;
+}
+
+#content > .wrapper {
+  overflow: hidden;
+  
+  .hbox();
+}
+
+#content .east {
+  background: #EDEDED;
+  width: 200px;
+  
+  .box-flex(0);
+}
+
+#content .east h3 {
+  display: block;
+  padding: 7px 7px 7px 15px;
+  border: 1px solid #C5C5C5;
+  border-width: 1px 0 1px 0;
+  margin: 10px 0 0 0;
+  
+  .vbg-gradient(#FFF, #DEDFE0);  
+  .box-shadow(0, -5px, 10px, #E4E4E4);
+}
+
+#content .east div {
+}
+
+#content .east ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#content .east ul li {
+  display: block;
+  padding: 10px 10px 7px 20px;
+  border-bottom: 1px solid #CDCDCC;
+  cursor: pointer;
+  
+  .box-shadow(0, 1px, 1px, #FCFCFC);
+}
+
+#content .east ul li.active {
+  color: #FFF;
+  text-shadow: 0 1px 1px #46677F;
+  
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+
+  .vbg-gradient(#7BB5DB, #4775B8);
+}
+
+#content .east ul li a:hover {
+  text-decoration: none;
+}
+
+#content .east .search {
+  margin: 0 auto;
+  width: 170px;
+  margin: 15px 10px;
+  font-size: 20px;
+}
+
+#content .west {
+  position: relative;
+  min-width: 825px;
+  
+  .box-flex(1);
+  .vbox();
+}
+
+#content .vdivide {
+  width: 6px;
+  border: 1px solid #C5C5C5;
+  border-width: 0 1px 0 1px;
+  border-right-color:  rgba(0, 0, 0, 0.3);
+  
+  .hbg-gradient(#F9F9F9, #DFE0E1);
+}
+
+#content .hdivide {
+  height: 6px;
+  border: 1px solid #C5C5C5;
+  border-width: 1px 0 1px 0;
+  
+  .vbg-gradient(#F9F9F9, #DFE0E1);
+}
+
+.progress {
+  margin-top: 10px;
+  padding: 7px 7px 6px 7px;
+  
+  .vbg-gradient(#F9F9F9, #E7E8E9);
+/*  background: -webkit-gradient(linear, left top, left bottom, from(#F9F9F9), color-stop(0.4, #F9F9F9), color-stop(0.6, #E7E8E9), to(#E7E8E9));*/
+  
+  .border-radius(15px);
+
+  -webkit-box-shadow: inset 0 -1px 1px #FFF, 0px 1px 3px #7F7F7F;
+  -moz-box-shadow: inset 0 -1px 1px #FFF, 0px 1px 3px #7F7F7F;
+}
+
+.progress .per {
+  display: inline-block;
+  color: #666666;
+  margin-left: 15px;
+}
+
+.ui-progressbar { 
+  height: 20px; 
+  text-align: left;
+  overflow: hidden;
+  
+  .vbg-gradient(#AAABAE, #DEDFE1);
+  .border-radius(10px);
+  .box-shadow(0, 1px, 1px, #FFF);
+}
+
+.ui-progressbar .ui-progressbar-value {  
+  margin: -1px; 
+  height: 100%;
+  
+  .vbg-gradient(#56B5DD, #1E79BD);
+  .box-shadow(1px, 0, 6px, rgba(0, 0, 0, 0.3));
+
+  -webkit-transition: width 500ms ease-out;
+  -moz-transition: width 500ms ease-out;
+}
+
+.ui-dialog {
+  padding: 0;
+
+  .border-radius(10px);
+  .vbg-gradient(#FFF, #E0E0E1);
+  
+  -webkit-box-shadow: inset 0 -1px 1px #FFF, 0px 5px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 -1px 1px #FFF, 0px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  height: 25px;
+  overflow: hidden;
+  text-align: center;
+  color: #FFF;
+  border-bottom: 1px solid #535353;
+  
+  .vbg-gradient(#575859, #272425);
+
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+}
+
+.ui-dialog .ui-dialog-content {
+  line-height: 1.3em;
+  padding: 15px 10px 10px 15px;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+  border-top: 1px solid #CDCDCC;
+  padding: 9px 0;
+  margin: 0 9px;
+  
+  .inset-box-shadow(0, 1px, 1px, #FCFCFC);
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+  margin: 0 3px 0 3px;
+}
+
+.ui-dialog .ui-dialog-titlebar-close { display: none !important; }
+
+.tip {
+  padding: 10px;
+  color: #FFF;
+  background: #323232;
+  opacity: 0.8;
+  
+  .vbg-gradient(#323232, #222222);
+  .border-radius(10px);
+}
+
+@import "states/loading";
+@import "states/activity";
+@import "states/channel";
+@import "states/search";
+@import "states/settings";
+@import "states/intro";

@@ -1,0 +1,73 @@
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+  font-size: 16px;
+  color: #363636;
+  -webkit-user-select: none;
+  line-height: 1.2em;
+}
+
+h1, h2 {
+  font-weight: bold;
+  text-shadow: 0 1px 1px #FFF;
+}
+
+h1 {
+  font-size: 21pt;
+  color: #404040;
+  margin: 0.2em 0 1em 0;
+}
+
+h2 {
+  font-size: 24pt;
+  color: #404040;
+}
+
+h3 {
+  font-size: 15px;
+  color: #404040;
+  text-shadow: 0 1px 1px #FFF;
+}
+
+h4 {
+  font-size: 14pt;
+  color: #7E7F7E;
+  text-shadow: 0 1px 1px #FFF;
+} 
+
+a {
+  color: #363636;
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img {
+  border: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table tr {
+  margin: 0px 0px 10px;
+  padding: 5px 10px 10px;
+  -webkit-box-shadow: #FCFCFC 0px 1px 1px;
+  border-bottom: 1px solid #CDCDCC;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

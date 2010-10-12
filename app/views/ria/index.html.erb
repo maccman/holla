@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= AppConfig.app_name %></title>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tag %>
+  <%= application_meta_tag %>
+    
+  <script src="http://<%= AppConfig.juggernaut_host %>/application.js" type="text/javascript" charset="utf-8"></script>
+  <%= javascript_include_tag "application" %>
+  
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+</head>
+<body>
+  
+  <div id="wrapper">
+    <header id="title">
+      <h1><%= AppConfig.app_name %></h1>
+      
+      <div class="menu">
+        <%= link_to(current_user.name, current_users_path, :title => "Account", :class => "account") %>
+        <%= link_to("Logout", logout_path, :title => "Logout", :class => "logout") %>
+      </div>
+    </header>
+    
+    <div id="content">      
+      <div class="wrapper">        
+        <div class="east">
+          <h3>Profile</h3>
+          <div>
+            <ul>
+              <li data-menu="activity">Activity</li>
+              <li data-menu="settings">Settings</li>
+            </ul>
+          </div>
+          
+          <h3>Channels</h3>
+          
+          <div>
+            <ul id="channels">
+              <li>${name}</li>
+            </ul>
+          </div>
+          
+          <h3>Search</h3>
+          
+          <div>
+            <input type="search" name="search" value="" class="search" placeholder="Search" results="0" incremental="true">
+          </div>
+          
+        </div>
+        
+        <div class="vdivide"></div>
+        
+        <div class="west">
+          <div id="views">
+            <div class="loading" data-view="loading">
+              <h2>Loading...</h2>
+            </div>
+            
+            <div class="channel" data-view="channel">
+              <div class="share">
+                <form data-name="share">
+                  <textarea data-name="input"></textarea>
+                  <button class="pill">Share</button>
+                </form>
+              </div>
+              
+              <div class="container">
+                <div class="roster" data-name="roster">
+                  <div>
+                    <div class="avatar">
+                      <img src="/images/missing.png" />
+                    </div>
+                    <div class="name ellipsis">${user_name}</div>
+                  </div>
+                </div>
+                
+                <div class="items activity" data-name="items">
+                  <div class="item">
+                    <div class="avatar">
+                      <img src="/images/missing.png" />
+                    </div>
+                    
+                    <div class="content">
+                      <div class="arrow"></div>
+                      <div class="body">
+                        <div class="text"></div>
+                        <div class="preview"><img /></div>
+                        <div class="progress"><div class="bar"></div></div>
+                      </div>
+                    </div>                      
+                  </div>            
+                </div>
+              </div>
+            </div>
+            
+            <div class="search" data-view="search">
+              <h2 data-name="results">Search results: ${query}</h2>
+              
+              <div class="items activity" data-name="items">
+                <div class="item">
+                  <div class="avatar">
+                    <img src="/images/missing.png" />
+                  </div>
+                  
+                  <div class="content">
+                    <div class="arrow"></div>
+                    <div class="body">
+                      <div class="text"></div>
+                      <div class="preview"><img /></div>
+                    </div>
+                  </div>                      
+                </div>            
+              </div>
+            </div>
+            
+            <div class="settings" data-view="settings">
+              <div class="container">
+                <h2>Channels</h2>
+              
+                <table data-name="channels">
+                  <tr>
+                    <td class="name ellipsis" title="Click to edit"><b>${name}</b></td>
+                    <td><a class="share">Share</a></td>
+                    <td><a class="disconnect">Remove</a></td>
+                  </tr>
+                  <tr class="share">
+                    <td colspan="4">
+                      <label>
+                        <span>Share this link to give access:</span>
+                        <input type="text" class="copy" value="${getLink()}" readonly>
+                      </label>
+                    </td>
+                  </tr>
+                </table>
+              
+                <h2>Create Channel</h2>
+                <form class="piece" data-name="create">
+                  <label>
+                    <input type="text" placeholder="Channel name">
+                    <button class="left pill">Create</button>
+                  </label>
+                </form>
+              </div>
+            </div>
+            
+            <div class="intro" data-view="intro">
+              <div class="container">
+                <h2>Welcome to <%= app_name %>!</h2>
+                
+                <p>Now, create your first channel:</p>
+                <form class="piece" data-name="create">
+                  <label>
+                    <input type="text" data-name="input" placeholder="Channel name">
+                    <button class="left pill">Create</button>
+                  </label>
+                </form>
+                
+                <hr />
+                
+                <div class="visual">
+                  <%= image_tag "intro.png" %>
+                  <div class="area areaSettings" data-title="Invite people to chat"></div>
+                  <div class="area areaChannels" data-title="Navigate between different channels"></div>
+                  <div class="area areaRoster" data-title="See online friends" data-position="left"></div>
+                  <div class="area areaDrag" data-title="Drag and drop files" data-position="left"></div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="activity" data-view="activity">
+              <div class="container">
+                <h2>Coming soon...</h2>
+              </div>
+            </div>
+            
+          </div> <!-- /#views -->
+        </div> <!-- /.west -->
+      </div> <!-- /.wrapper -->        
+    </div> <!-- /#content -->
+  </div> <!-- /#wrapper -->
+
+</body>
+</html>

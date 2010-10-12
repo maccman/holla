@@ -1,0 +1,286 @@
+@import "utils";
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+  font-size: 16px;
+  color: #363636;
+  -webkit-user-select: none;
+  line-height: 1.2em;
+}
+
+h1, h2 {
+  font-weight: bold;
+  text-shadow: 0 1px 1px #FFF;
+}
+
+h1 {
+  font-size: 21pt;
+  color: #404040;
+}
+
+h2 {
+  font-size: 24pt;
+  color: #404040;
+  margin: 1em 0 0.7em 0;
+}
+
+h3 {
+  font-size: 15px;
+  color: #404040;
+  text-shadow: 0 1px 1px #FFF;
+}
+
+h4 {
+  font-size: 14pt;
+  color: #7E7F7E;
+  text-shadow: 0 1px 1px #FFF;
+} 
+
+a {
+  color: #363636;
+  cursor: pointer;
+  text-decoration: underline;
+  
+  :hover {
+    text-decoration: underline;
+  }
+}
+
+img {
+  border: 0;
+}
+
+hr {
+  margin: 1.3em 0.4em;
+  border: 0;
+  border-bottom: 1px solid #CDCDCC;
+
+  .box-shadow(0, 1px, 1px, #FCFCFC);
+}
+
+header {
+  display: block;
+}
+
+#title {
+  border-bottom: 1px solid #535353;
+  overflow: hidden;
+  height: 50px;
+  
+  .vbg-gradient(#575859, #272425);
+  .inset-box-shadow(0, 1px, 1px, #000);
+}
+
+#title h1 {
+  color: #FFF;
+  text-shadow: 0 1px 1px #000;
+}
+
+#title h1 a {
+  color: #FFF;
+  text-decoration: none;
+}
+
+.panel {
+  border-style: solid;  
+  border-width: 1px 0;
+  border-top-color: #CBCBCB;
+  border-bottom-color: #D7D7D7;
+
+  .vbg-gradient(#FFF, #E0E0E1);  
+}
+
+.innerPanel {
+  padding: 5px;
+  background: #F2F2F2;
+  border: 1px solid #EDEDED;
+  
+  .border-radius(5px);
+}
+
+.popup {
+  background: #F1F2F2;
+  border: 1px solid #FFF;
+  
+  .box-shadow(0, 10px, 10px, #E3E3E3);
+}
+
+.popup h2 {
+  display: block;
+  padding: 4px;
+  
+  .vbg-gradient(#575859, #272425);
+}
+
+button {
+  border: 1px solid #BBBBBB;
+  color: #000;
+  font-size: 17px;
+  padding: 6px 10px;
+  margin: 1px 1px 1px 0;
+  outline: none;
+
+  .vbg-gradient(#F9F9F9, #E3E3E3);
+  .border-radius(3px);
+  .box-shadow(0, 1px, 1px, #FFF);
+  
+  :active {
+    .vbg-gradient(#E3E3E3, #F9F9F9);
+  }
+}
+
+button.pill {
+  -khtml-appearance: none;
+  text-align: center;
+  color: #374047;
+  padding: 5px 25px;
+  font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  text-shadow: 0 1px 1px #F1F1F2;
+  border: 1px solid #B1B1B1;
+  
+  .box-shadow(0, 1px, 1px, #FFF);
+  .vbg-gradient(#F9F9FA, #CFD1D3);
+  .border-radius(18px);
+}
+
+button.pill:active, button.pill.active {
+  .vbg-gradient(#D4D6D7, #F9F9FA);
+}
+
+button.pill.default {  
+  border: 1px solid #325170;
+  color: #FFF;
+  text-shadow: 0 1px 1px #375167;
+  
+  .vbg-gradient(#78B1D9, #4978B9);
+  
+  :active, .active {
+    .vbg-gradient(#4978B9, #78B1D9);
+  }
+}
+
+textarea, 
+input[type="text"], 
+input[type="password"] {
+  border: 1px solid #9E9FA2;
+  color: #363636;
+  text-shadow: 0 1px 1px #FFF;
+  font-size: 17px;
+  outline: none;
+  padding: 10px;
+  
+  .border-radius(20px);
+  .vbg-gradient(#E6E6E7, #FAFAFA);  
+  background: -webkit-gradient(linear, left top, left bottom, from(#E6E6E7), color-stop(0.3, #FAFAFA), to(#FAFAFA));  
+}
+
+label {
+  display: block;
+  margin: 0 0 20px 0;
+  overflow: visible;
+}
+
+label span {
+  display: block;
+  margin-bottom: 6px;
+  margin-left: -3px;
+}
+
+label input {
+  font-size: 14px;
+}
+
+label input[type="checkbox"] {
+  width: 15px !important;
+  margin-right: 7px;
+  display: inline-block;
+}
+
+label input[type="checkbox"] + span {
+  display: inline;
+}
+
+label input {
+  display: block;
+}
+
+label input[type="text"],
+label input[type="password"],
+textarea {
+  width: 200px;
+}
+
+input.dark {
+  -khtml-appearance: none;
+  padding: 3px 10px;
+  background: #666666;
+  border: 1px solid #000;
+  font-size: 15px;
+  outline: none;
+  color: #FFF;
+  height: 20px;
+  
+  .border-radius(15px);
+}
+
+form.piece label {
+  padding: 5px 10px 10px;
+  margin: 0px 0px 10px;
+  overflow: hidden;
+  border-bottom: 1px solid #CDCDCC;
+  
+  .box-shadow(0, 1px, 1px, #FCFCFC);
+}
+
+form.piece label span {
+  width: 140px;
+  margin-right: 10px;
+  height: 40px;
+  line-height: 40px;
+  float: left;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #666666;
+}
+
+form.piece label input {
+  float: left;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  overflow: visible;
+  border-collapse: collapse;
+  
+  tr {
+    border-bottom: 1px solid #CDCDCC;
+  }
+  
+  tr td {
+    padding: 10px;
+  }
+}
+
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}

@@ -1,0 +1,207 @@
+GIT
+  remote: git://github.com/eventmachine/eventmachine.git
+  revision: 5f1b8d770721c10a7481d82eca18b563de87da3c
+  specs:
+    eventmachine (0.12.11)
+
+GIT
+  remote: git://github.com/maccman/authlogic.git
+  revision: acddb9d8b91f6da23268ed67248f430af3513a3a
+  specs:
+    authlogic (2.1.5)
+      activesupport
+
+GIT
+  remote: git://github.com/maccman/happening.git
+  revision: 897be30cf0ddd4551df2704c2b1c0d2e9835723c
+  specs:
+    happening (0.0.9)
+      activesupport
+      em-http-request
+
+GIT
+  remote: git://github.com/maccman/less.git
+  revision: b25c0c7ed7cabffdbb0146044c36b5deb597399a
+  specs:
+    less (1.2.21)
+      mutter (>= 0.4.2)
+      treetop (>= 1.4.2)
+
+GIT
+  remote: git://github.com/maccman/mail.git
+  revision: 8d0b33951c09c06c97b359fda497477033ab9903
+  specs:
+    mail (2.2.5)
+      activesupport (>= 2.3.6)
+      mime-types
+      treetop (>= 1.4.5)
+
+GIT
+  remote: git://github.com/maccman/nestful.git
+  revision: 816f29c747c2b2d4ae042224a7d8ccad403ce3d3
+  specs:
+    nestful (0.0.3)
+      activesupport (>= 2.3.8)
+
+GIT
+  remote: git://github.com/maccman/remail.git
+  revision: bd108e68d1f50da7cef9e07e8dae9dac7f98571a
+  specs:
+    remail (0.0.3)
+      activeresource
+
+GIT
+  remote: git://github.com/maccman/roauth.git
+  revision: 3f1a2551f3dc145dd96ebe71b876c6d32751d3f5
+  specs:
+    roauth (0.0.3)
+
+GIT
+  remote: git://github.com/maccman/supermodel.git
+  revision: d650d99c432ab1f2156fb714b32bf74ec60d562b
+  specs:
+    supermodel (0.1.4)
+      activemodel (~> 3.0.0)
+
+GIT
+  remote: git://github.com/thoughtbot/paperclip.git
+  revision: 9e6afe4ff5b6b07bb1d50a4cb4bdd85feb1c9bbf
+  specs:
+    paperclip (2.3.3)
+      activerecord
+      activesupport
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    abstract (1.0.0)
+    actionmailer (3.0.0)
+      actionpack (= 3.0.0)
+      mail (~> 2.2.5)
+    actionpack (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      erubis (~> 2.6.6)
+      i18n (~> 0.4.1)
+      rack (~> 1.2.1)
+      rack-mount (~> 0.6.12)
+      rack-test (~> 0.5.4)
+      tzinfo (~> 0.3.23)
+    activemodel (3.0.0)
+      activesupport (= 3.0.0)
+      builder (~> 2.1.2)
+      i18n (~> 0.4.1)
+    activerecord (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+      arel (~> 1.0.0)
+      tzinfo (~> 0.3.23)
+    activeresource (3.0.0)
+      activemodel (= 3.0.0)
+      activesupport (= 3.0.0)
+    activesupport (3.0.0)
+    addressable (2.2.1)
+    archive-tar-minitar (0.5.2)
+    arel (1.0.1)
+      activesupport (~> 3.0.0)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
+    builder (2.1.2)
+    columnize (0.3.1)
+    daemons (1.1.0)
+    em-http-request (0.2.12)
+      addressable (>= 2.0.0)
+      eventmachine (>= 0.12.9)
+    erubis (2.6.6)
+      abstract (>= 1.0.0)
+    i18n (0.4.1)
+    juggernaut (2.0.0.beta3)
+      redis
+    linecache19 (0.5.11)
+      ruby_core_source (>= 0.1.4)
+    mime-types (1.16)
+    mutter (0.5.3)
+    mysql2 (0.2.3)
+    oauth (0.4.3)
+    polyglot (0.3.1)
+    rack (1.2.1)
+    rack-fiber_pool (0.9.0)
+    rack-less (1.4.0)
+      less (>= 1.2.21)
+      rack (>= 0.4)
+    rack-mount (0.6.13)
+      rack (>= 1.0.0)
+    rack-sprockets (1.0.4)
+      rack (>= 0.4)
+      sprockets (>= 1.0.0)
+    rack-test (0.5.4)
+      rack (>= 1.0)
+    rails (3.0.0)
+      actionmailer (= 3.0.0)
+      actionpack (= 3.0.0)
+      activerecord (= 3.0.0)
+      activeresource (= 3.0.0)
+      activesupport (= 3.0.0)
+      bundler (~> 1.0.0)
+      railties (= 3.0.0)
+    railties (3.0.0)
+      actionpack (= 3.0.0)
+      activesupport (= 3.0.0)
+      rake (>= 0.8.4)
+      thor (~> 0.14.0)
+    rake (0.8.7)
+    redis (2.0.6)
+    ruby-debug-base19 (0.11.24)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby_core_source (>= 0.1.4)
+    ruby-debug19 (0.11.6)
+      columnize (>= 0.3.1)
+      linecache19 (>= 0.5.11)
+      ruby-debug-base19 (>= 0.11.19)
+    ruby-openid (2.1.8)
+    ruby_core_source (0.1.4)
+      archive-tar-minitar (>= 0.5.2)
+    sprockets (1.0.2)
+    thin (1.2.7)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
+    thor (0.14.0)
+    treetop (1.4.8)
+      polyglot (>= 0.3.1)
+    tzinfo (0.3.23)
+    xml-simple (1.0.12)
+    yui-compressor (0.9.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  activesupport (= 3.0.0)
+  authlogic!
+  aws-s3
+  eventmachine!
+  happening!
+  juggernaut (>= 2.0.0.beta3)
+  less!
+  mail!
+  mysql2
+  nestful!
+  oauth
+  paperclip!
+  rack-fiber_pool
+  rack-less
+  rack-sprockets
+  rails (= 3.0.0)
+  redis (>= 2.0.0.rc2)
+  remail!
+  roauth!
+  ruby-debug19
+  ruby-openid
+  supermodel!
+  thin
+  yui-compressor

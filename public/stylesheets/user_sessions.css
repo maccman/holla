@@ -1,0 +1,8 @@
+#inner {
+  width: 250px;
+}
+
+#content .forgot {
+  font-size: 13px;
+  display: none;
+}

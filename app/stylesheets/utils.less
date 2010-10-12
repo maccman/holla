@@ -1,0 +1,75 @@
+/* 
+Less CSS3 utils.
+
+Usage:
+  .fooClass {
+    border: 3px solid #000;
+    .vbg-gradient(#FFF, #CCC);
+    .hbox();
+  }
+*/
+
+.border-radius(@r: 3px) {
+  -moz-border-radius: @r;
+  -webkit-border-radius: @r;
+  border-radius: @r;
+}
+
+/* Vertical Background Gradient */
+.vbg-gradient(@fc: #FFF, @tc: #FFF) {
+  background: @fc;
+  background: -webkit-gradient(linear, left top, left bottom, from(@fc), to(@tc));
+  background: -moz-linear-gradient(top, @fc, @tc);
+}
+
+/* Horizontal Background Gradient */
+.hbg-gradient(@fc: #FFF, @tc: #FFF) {
+  background: @fc;
+  background: -webkit-gradient(linear, left top, right top, from(@fc), to(@tc));
+  background: -moz-linear-gradient(left, @fc, @tc);
+}
+
+.box-shadow (@h: 0px, @v: 0px, @b: 4px, @c: #333) {
+  box-shadow: @h @v @b @c;
+  -moz-box-shadow: @h @v @b @c;
+  -webkit-box-shadow: @h @v @b @c;
+}
+
+.inset-box-shadow (@h: 0px, @v: 0px, @b: 4px, @c: #333) {
+  box-shadow: inset @h @v @b @c;
+  -moz-box-shadow: inset @h @v @b @c;
+  -webkit-box-shadow: inset @h @v @b @c;
+}
+
+.box-flex (@s: 0) {
+  -webkit-box-flex: @s;
+  -moz-box-flex: @s;
+}
+
+.hbox () {
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  -webkit-box-pack: left;
+  
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  -moz-box-pack: left;
+}
+
+.vbox () {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+}
+
+.border-box () {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
