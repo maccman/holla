@@ -6,14 +6,6 @@ GIT
       activesupport
 
 GIT
-  remote: git://github.com/maccman/happening.git
-  revision: 897be30cf0ddd4551df2704c2b1c0d2e9835723c
-  specs:
-    happening (0.0.9)
-      activesupport
-      em-http-request
-
-GIT
   remote: git://github.com/maccman/less.git
   revision: b25c0c7ed7cabffdbb0146044c36b5deb597399a
   specs:
@@ -66,7 +58,6 @@ GEM
       activemodel (= 3.0.0)
       activesupport (= 3.0.0)
     activesupport (3.0.0)
-    addressable (2.2.1)
     archive-tar-minitar (0.5.2)
     arel (1.0.1)
       activesupport (~> 3.0.0)
@@ -77,9 +68,6 @@ GEM
     builder (2.1.2)
     columnize (0.3.1)
     daemons (1.1.0)
-    em-http-request (0.2.12)
-      addressable (>= 2.0.0)
-      eventmachine (>= 0.12.9)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     eventmachine (0.12.10)
@@ -150,7 +138,6 @@ PLATFORMS
 DEPENDENCIES
   authlogic!
   aws-s3
-  happening!
   juggernaut (>= 2.0.0.beta3)
   less!
   paperclip!

@@ -37,20 +37,18 @@ module Holla
     #   g.test_framework  :test_unit, :fixture => true
     # end
         
+    # Configure the default encoding used in templates for Ruby 1.9.
+    config.encoding = "utf-8"
+    
+    # Configure sensitive parameters which will be filtered from the log file.
+    config.filter_parameters += [:password, :password_confirmation]
+    
     require "rack/sprockets"
     config.middleware.use "Rack::Sprockets", :load_path => ["app/javascripts/", "app/javascripts/lib/"]
     
     require "rack/less"
     config.middleware.use "Rack::Less"
-    
-    # Configure the default encoding used in templates for Ruby 1.9.
-    config.encoding = "utf-8"
-    
-    config.threadsafe!
-
-    # Configure sensitive parameters which will be filtered from the log file.
-    config.filter_parameters += [:password, :password_confirmation]
-    
+        
     config.active_record.include_root_in_json = false
     SuperModel::Base.include_root_in_json     = false
     

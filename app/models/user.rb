@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
                     :styles => { 
                       :thumb => ["48x48#", :png]
                     },
-                    :storage => :happening,
+                    :storage => :s3,
                     :s3_credentials => {
                       :access_key_id => AppConfig.aws[:access_key_id], 
                       :secret_access_key => AppConfig.aws[:secret_access_key]

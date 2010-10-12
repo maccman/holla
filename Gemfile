@@ -9,7 +9,6 @@ gem "supermodel", :git => "git://github.com/maccman/supermodel.git"
 gem "juggernaut", ">= 2.0.0.beta3"
 
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
-gem "happening", :git => "git://github.com/maccman/happening.git"
 gem "aws-s3", :require => "aws/s3"
 
 gem "less", :git => "git://github.com/maccman/less.git"

@@ -14,7 +14,7 @@ class Asset < ActiveRecord::Base
   attr_accessible :id, :name, :size, :data
   
   has_attached_file :data, 
-                    :storage => :happening,
+                    :storage => :s3,
                     :s3_credentials => {
                       :access_key_id => AppConfig.aws[:access_key_id], 
                       :secret_access_key => AppConfig.aws[:secret_access_key]
@@ -28,7 +28,7 @@ class Asset < ActiveRecord::Base
   before_data_post_process Proc.new {|d| d.uploaded = true }
                     
   has_attached_file :preview, 
-                    :storage => :happening,
+                    :storage => :s3,
                     :s3_credentials => {
                       :access_key_id => AppConfig.aws[:access_key_id], 
                       :secret_access_key => AppConfig.aws[:secret_access_key]
