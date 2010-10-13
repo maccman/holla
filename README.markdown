@@ -12,6 +12,7 @@ Try it out in your browser (Chrome optimized) - [http://getholla.com](http://get
 * Ruby 1.9.2
 * Bundler
 * Redis
+* Mysql
 
 # Installation
 
