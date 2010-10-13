@@ -82,6 +82,7 @@ GEM
       treetop (>= 1.4.5)
     mime-types (1.16)
     mutter (0.5.3)
+    mysql2 (0.2.4)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-less (1.4.0)
@@ -120,7 +121,6 @@ GEM
     ruby_core_source (0.1.4)
       archive-tar-minitar (>= 0.5.2)
     sprockets (1.0.2)
-    sqlite3-ruby (1.3.1)
     thin (1.2.7)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
@@ -140,13 +140,13 @@ DEPENDENCIES
   aws-s3
   juggernaut (>= 2.0.0.beta3)
   less!
+  mysql2
   paperclip!
   rack-less
   rack-sprockets
   rails (= 3.0.0)
   redis (>= 2.0.0.rc2)
   ruby-debug19
-  sqlite3-ruby
   supermodel!
   thin
   yui-compressor

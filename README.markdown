@@ -16,7 +16,10 @@ Try it out in your browser (Chrome optimized) - [http://getholla.com](http://get
 # Installation
 
 * bundle install
-* rake db:setup
+* rake db:create
+* cat db/development_structure.sql | rails dbconsole
 * start redis
-* rails thin server
+* rails server thin
 * start the Juggernaut server - [http://github.com/maccman/juggernaut](http://github.com/maccman/juggernaut)
+
+Now go to [http://localhost:3000/register](http://localhost:3000/register)

@@ -20,5 +20,5 @@ group :development do
   gem "ruby-debug19", :require => "ruby-debug"
 end
 
-gem "sqlite3-ruby"
+gem "mysql2"
 gem "thin"
