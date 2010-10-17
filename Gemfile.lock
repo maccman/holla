@@ -15,16 +15,16 @@ GIT
 
 GIT
   remote: git://github.com/maccman/supermodel.git
-  revision: d650d99c432ab1f2156fb714b32bf74ec60d562b
+  revision: 3599867fe915a209612cf24eb326d04b1355b752
   specs:
     supermodel (0.1.4)
       activemodel (~> 3.0.0)
 
 GIT
   remote: git://github.com/thoughtbot/paperclip.git
-  revision: 9e6afe4ff5b6b07bb1d50a4cb4bdd85feb1c9bbf
+  revision: ef7233d25700a7e69cebd2334b656fa9ca0ae927
   specs:
-    paperclip (2.3.3)
+    paperclip (2.3.4)
       activerecord
       activesupport
 
@@ -76,7 +76,7 @@ GEM
       redis
     linecache19 (0.5.11)
       ruby_core_source (>= 0.1.4)
-    mail (2.2.5)
+    mail (2.2.7)
       activesupport (>= 2.3.6)
       mime-types
       treetop (>= 1.4.5)
@@ -85,7 +85,7 @@ GEM
     mysql2 (0.2.4)
     polyglot (0.3.1)
     rack (1.2.1)
-    rack-less (1.4.0)
+    rack-less (1.5.0)
       less (>= 1.2.21)
       rack (>= 0.4)
     rack-mount (0.6.13)
@@ -93,7 +93,7 @@ GEM
     rack-sprockets (1.0.4)
       rack (>= 0.4)
       sprockets (>= 1.0.0)
-    rack-test (0.5.4)
+    rack-test (0.5.6)
       rack (>= 1.0)
     rails (3.0.0)
       actionmailer (= 3.0.0)
@@ -109,7 +109,7 @@ GEM
       rake (>= 0.8.4)
       thor (~> 0.14.0)
     rake (0.8.7)
-    redis (2.0.6)
+    redis (2.0.11)
     ruby-debug-base19 (0.11.24)
       columnize (>= 0.3.1)
       linecache19 (>= 0.5.11)
@@ -125,7 +125,7 @@ GEM
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
-    thor (0.14.0)
+    thor (0.14.3)
     treetop (1.4.8)
       polyglot (>= 0.3.1)
     tzinfo (0.3.23)

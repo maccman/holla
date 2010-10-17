@@ -3,7 +3,6 @@ class Roster < SuperModel::Base
   include SuperModel::Timestamp::Model
 
   attributes :count
-  serialize  :count
 
   belongs_to :user
   validates_presence_of   :user_id
@@ -63,9 +62,7 @@ class Roster < SuperModel::Base
   
   delegate :name, :to => :user, :prefix => true
   
-  def serializable_hash(options = nil)
-    options ||= {}
-    options[:methods] = :user_name
-    super(options)
+  serialize_options do
+    methods :user_name
   end
 end

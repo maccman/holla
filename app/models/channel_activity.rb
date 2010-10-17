@@ -13,8 +13,6 @@ class ChannelActivity < SuperModel::Base
 
   belongs_to :channel
   
-  serialize :data
-  
   validates_presence_of :klass, :channel_id, :creator_id
   
   before_create :set_creator_name

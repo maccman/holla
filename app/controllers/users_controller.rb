@@ -55,7 +55,7 @@ class UsersController < ApplicationController
   
   def avatar
     @user = User.find(params[:id])
-    redirect_to @user.avatar.url(:thumb)
+    redirect_to @user.gravatar_url
   end
   
   private

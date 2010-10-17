@@ -6,7 +6,7 @@
   Your Account
 <%- end -%>
 
-<%= form_for @user, :html => { :multipart => true, :class => "piece" } do |f| %>
+<%= form_for @user, :html => { :class => "piece" } do |f| %>
   <%= f.error_messages :header_message => false, :message => false %>
   
   <%= hidden_field_tag :user_credentials, params[:user_credentials] %>
@@ -35,13 +35,7 @@
     <span>Password again:</span>
     <%= f.password_field :password_confirmation, :autocomplete => "off" %>
   </label>
-  
-  <label>
-    <span>Avatar:</span>
-    <%= f.file_field :avatar %>
-    <%= image_tag @user.avatar.url(:thumb), :class => "avatar" %>
-  </label>
-  
+
   <footer>
     <button class="right">Save</button>
   </footer>

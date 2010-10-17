@@ -1,5 +1,3 @@
-require "paperclip/storage/happening"
-
 class Asset < ActiveRecord::Base  
   include ActiveRecord::Creator
   include ActiveRecord::RandomID
@@ -26,15 +24,4 @@ class Asset < ActiveRecord::Base
                     :whiny  => true
 
   before_data_post_process Proc.new {|d| d.uploaded = true }
-                    
-  has_attached_file :preview, 
-                    :storage => :s3,
-                    :s3_credentials => {
-                      :access_key_id => AppConfig.aws[:access_key_id], 
-                      :secret_access_key => AppConfig.aws[:secret_access_key]
-                    },
-                    :s3_permissions => "private",
-                    :path   => ":attachment/:id/:style.:extension",
-                    :bucket => AppConfig.aws[:bucket],
-                    :whiny  => true
 end

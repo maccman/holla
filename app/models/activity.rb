@@ -20,8 +20,7 @@ class Activity < SuperModel::Base
   include SuperModel::Creator
   belongs_to :user
   
-  serialize :data, :seen, :level
-  indexes   :user_id
+  indexes :user_id
   
   validates_presence_of :klass, :user_id, :creator_id
   

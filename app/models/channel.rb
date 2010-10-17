@@ -7,10 +7,10 @@ class Channel < ActiveRecord::Base
   has_many :users, :through => :user_channels
   
   after_create :set_user_channels
+    
+  validates_presence_of :name
   
   attr_accessible :id, :name
-  
-  validates_presence_of :name
   
   def channel_activity
     ChannelActivity.for_channel(self)

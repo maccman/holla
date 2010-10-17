@@ -19,20 +19,6 @@ class User < ActiveRecord::Base
   
   acts_as_authentic
   
-  has_attached_file :avatar, 
-                    :styles => { 
-                      :thumb => ["48x48#", :png]
-                    },
-                    :storage => :s3,
-                    :s3_credentials => {
-                      :access_key_id => AppConfig.aws[:access_key_id], 
-                      :secret_access_key => AppConfig.aws[:secret_access_key]
-                    },
-                    :default_url => "/images/missing.png",
-                    :path    => ":attachment/:id/:style.:extension",
-                    :bucket  => AppConfig.aws[:bucket],
-                    :whiny   => true
-  
   def channel_activity
     channels.channel_activity
   end
@@ -50,15 +36,13 @@ class User < ActiveRecord::Base
     [first_name, last_name].join(" ")
   end
   
-  def serializable_hash(options = nil)
-    options ||= {}
-    options[:only] ||= []
-    options[:only] += [
-      :first_name, 
-      :last_name,
-      :email,
-      :id
-    ]
-    super(options)
+  def gravatar_url
+    "http://gravatar.com/avatar/" + 
+    "#{Digest::MD5.new.update(email.downcase)}"
+  end
+  
+  serialize_options do
+    only :id, :email
+    only :first_name, :last_name
   end
 end
