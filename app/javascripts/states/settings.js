@@ -6,7 +6,7 @@ jQuery(function(){
   $("input.copy").live("click", function(){
     $(this).select();
   });
-})
+});
 
 var state = App.state.add("settings");
 
@@ -19,21 +19,21 @@ state.setup(function(){
   });
   
   this.channels.delegate("a.share", "click", function(){
-    $(this).parents("tr").next(".share").show();
+    $(this).parents("tr").next(".share").toggleDisplay();
   });
   
-  this.channels.delegate("td.name", "edited", function(e, name){
-    var channel  = $(this).parents(".connect-item").item();
+  this.channels.delegate("td.name", "value.edit", function(e, name){    
+    var channel  = $(this).item();
     channel.name = name;
     channel.save();
     channel.updateRemote();
   });
   
-  this.channels.delegate("td.name", "click", function(){
+  this.channels.delegate("td.name", "click", function(e){
     $(this).startEditable();
   });
-
-  this.channelConnector = new SuperConnect(Channel, this.channels);  
+  
+  this.channelConnector = this.channels.connect(Channel);
   this.channelConnector.render();
   
   this.create.submit(this.proxy(function(e){

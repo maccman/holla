@@ -15,7 +15,7 @@ state.load(function(){
 });
 
 state.setup(function(){
-  this.connector = new SuperConnect(Search, this.items);
+  this.connector = this.items.connect(Search);
   
   var channelState = App.state.find("channel");
   this.connector.builder = function(element, item) { 

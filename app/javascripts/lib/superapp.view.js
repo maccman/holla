@@ -75,8 +75,11 @@ if (typeof SuperApp != "undefined") {
       if ( !this.hasView ) return;
       this.view = this.app.view.find(this.name);
       this.view.find("[data-name]").each(this.proxy(function(i, item){
-        item = jQuery(item);
-        this[item.attr("data-name")] = item;
+        // We're re-selecting the element, so jQuery has
+        // a proper selector attribute, useful for live events
+        var name     = jQuery(item).attr("data-name");
+        var selector = this.view.find("[data-name='" + name + "']");
+        this[name]   = selector;
       }));
     }
   });

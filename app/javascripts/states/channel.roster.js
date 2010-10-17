@@ -2,10 +2,7 @@
   
   var state = App.state.find("channel");
   state.load(function(){
-    this.rconnector = new SuperConnect(Roster, this.roster);
-    
-    // Should we show the current user in the list?
-    // this.rconnector.filter = function(item){ return(item.user_id != App.user_id) };
+    this.rconnector = this.roster.connect(Roster);
     
     this.rconnector.onCreate = $.proxy(function(item){
       if ( !this.filter(item) ) return;

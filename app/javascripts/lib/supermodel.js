@@ -31,14 +31,6 @@ SuperModel.extend({
     return record;
   },
 
-  findByAttribute: function(name, value){
-    for(var key in this.records){
-      if(this.records[key][name] == value){
-        return this.records[key].dup();
-      }
-    }
-  },
-
   find: function(id){
     var record = this.rawFind(id);
     return(record.dup());
@@ -69,15 +61,28 @@ SuperModel.extend({
   
   select: function(callback){
     var result = [];
-    for(var key in this.records){
-      if(callback(this.records[key]))
+    
+    for (var key in this.records)
+      if (callback(this.records[key]))
         result.push(this.records[key]);
-    }
+    
     return this.dupArray(result);
   },
   
+  findByAttribute: function(name, value){
+    for (var key in this.records)
+      if (this.records[key][name] == value)
+        return this.records[key].dup();
+  },
+  
+  findAllByAttribute: function(name, value){
+    return(this.select(function(item){
+      return(item[name] == value);
+    }));
+  },
+  
   each: function(callback){
-    for(var key in this.records) {
+    for (var key in this.records) {
       callback(this.records[key]);
     }
   },
@@ -87,15 +92,13 @@ SuperModel.extend({
   },
 
   deleteAll: function(){
-    for(var key in this.records){
+    for (var key in this.records)
       delete this.records[key];
-    }
   },
 
   destroyAll: function(){
-    for(var key in this.records){
+    for (var key in this.records)
       this.records[key].destroy();
-    }
   },
 
   update: function(id, atts){
@@ -113,7 +116,7 @@ SuperModel.extend({
   },
   
   populate: function(values){
-    this.records = [];
+    this.records = {};
     for (var i=0, il = values.length; i < il; i++) {    
       var record = new this(values[i])
       record.newRecord = false;
@@ -130,8 +133,8 @@ SuperModel.extend({
   },
 
   dupArray: function(array){
-    return jQuery.each(array, function(i, item){
-      return(item && item.dup());
+    return array.map(function(item){
+      return item.dup();
     });
   }
 });
@@ -255,6 +258,13 @@ SuperModel.include({
     return true;
   }
 });
+
+SuperModel.setupEvents([
+  "beforeSave", "afterSave", 
+  "beforeUpdate", "afterUpdate",
+  "beforeCreate", "afterCreate",
+  "beforeDestroy", "afterDestroy"
+]);
 
 // Setters and Getters
 

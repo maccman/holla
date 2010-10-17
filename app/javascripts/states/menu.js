@@ -24,14 +24,13 @@ jQuery(function($){
     return(App.state.find("channel").current);
   };
   
-  var connector = new SuperConnect(Channel, element, {
-    builder: function(element, item){
-      var channel      = currentChannel();
-      var channelState = App.state.current.name == "channel";
-      element.toggleClass("active", channelState && channel && 
-                                    item.id == channel.id);
-    }
-  });
-  
+  var connector   = element.connect(Channel);
+  connector.builder = function(element, item) {
+    var channel      = currentChannel();
+    var channelState = App.state.current.name == "channel";
+    element.toggleClass("active", channelState && channel && 
+                                  item.id == channel.id);
+  };
+
   App.state.bind("change", function(){ connector.render(); });
 });

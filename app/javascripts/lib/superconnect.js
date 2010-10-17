@@ -130,6 +130,7 @@
 })(jQuery);
 
 //= require <superclass>
+//= require <superevent>
 
 /*
  * jQuery data chaining plugin
@@ -138,10 +139,11 @@
  */
 var SuperConnect = new SuperClass;
 
+SuperConnect.include(SuperEvent);
 SuperConnect.include({
-  init: function(klass, element, options){
+  init: function(element, klass, options){
     this.options    = options || {};
-    this.singleton  = this.options.type == "singleton";
+    this.singleton  = this.options.singleton || false;
     this.collection = !this.singleton;
     this.filter     = function(){ return true; };
     this.builder    = this.options.builder;
@@ -152,7 +154,7 @@ SuperConnect.include({
   
   setKlass: function(klass){
     if ( !klass ) return;
-
+    
     this.klass = klass;
     if (this.collection)
       this.klass.on("populate", this.proxy(function(item){ this.onPopulate() }));
@@ -160,13 +162,15 @@ SuperConnect.include({
     // Not passing function instances so we can easily override
     this.klass.on("create",  this.proxy(function(item){ this.onCreate(item) }));
     this.klass.on("update",  this.proxy(function(item){ this.onUpdate(item) }));
-    this.klass.on("destroy", this.proxy(function(item){ this.onDestroy(item) }));
+    this.klass.on("destroy", this.proxy(function(item){ this.onDestroy(item) }));    
   },
   
   setElement: function(element){
-    if ( !element ) return;
+    if ( !element ) return;    
     
     this.element  = jQuery(element);
+    
+    if (this.options.custom) return;
     this.template = jQuery.tmpl(this.element.html());
     this.element.empty();
   },
@@ -174,7 +178,7 @@ SuperConnect.include({
   setItem: function(item){
     if ( !this.singleton ) throw "Must be singleton";
     this.item   = item;
-    this.filter = function(i){ i === item }
+    this.filter = function(i){ return(i === item); }
   },
   
   paginate: function(index, length){
@@ -186,15 +190,19 @@ SuperConnect.include({
     if ( !this.klass )   throw "Klass not set";
     if ( !this.element ) throw "Element not set";
     if ( !data ) data = this.allItems();
-    
+        
     // Generate and append elements
     var elements = this.renderTemplate(data);
     
-    this.element.empty();
-    this.element.append(elements);
+    this.trigger("beforeRender", elements, data);
     
-    // Trigger events
-    this.element.trigger("update", data.length);
+    if ( !this.options.custom ) {
+      this.element.empty();
+      this.element.append(elements);
+    }
+    
+    this.trigger("afterRender");
+    this.trigger("render");
   },
 
   // Private functions
@@ -202,10 +210,10 @@ SuperConnect.include({
   allItems: function(){    
     // Fetch data
     var data = this.collection ? this.klass.all() : [this.item];
-    
+        
     // Apply filter
     data = jQuery.grep(data, this.filter);
-    
+        
     // Sort array
     if (this.sort)
       data = data.sort(this.sort);
@@ -220,13 +228,13 @@ SuperConnect.include({
   renderTemplate: function(data){
     data = jQuery.makeArray(data);
     return jQuery.map( data, this.proxy(function( data, i ) {
-  		var element  = this.template.call( data, jQuery, data, i );
-      var jElement = jQuery(element);
+  		var element  = this.template && this.template.call( data, jQuery, data, i );
+      var jElement = jQuery(element || []);
       
       if (this.builder) this.builder.call(jElement, jElement, data);
       
-      if (data.id) jElement.attr("data-id", data.id);
-      jElement.data({id: data.id, klass: this.klass});
+      jElement.attr({"data-id": data.id, "data-klass": this.klass.className});
+      jElement.data({id: data.id, klass: this.klass.className});
       jElement.addClass("connect-item");
   		
   		return element;
@@ -234,7 +242,7 @@ SuperConnect.include({
   },
     
   findItem: function(id){
-    return(this.element.find("[data-id='" + id + "']"));
+    return(this.element.find("> [data-id='" + id + "']"));
   },
   
   onPopulate: function(){
@@ -245,30 +253,51 @@ SuperConnect.include({
     if ( !this.filter(item) ) return;
     var elements = this.renderTemplate(item);
     this.element.append(elements);
+    this.trigger("render");
   },
   
   onUpdate: function(item){
     if ( !this.filter(item) ) return;
-    if (item.id)
+    if (item.id) {
       this.findItem(item.id).replaceWith(
         this.renderTemplate(item)
       );
-    else
+      this.trigger("render");      
+    } else {
       this.render();
+    }
   },
   
   onDestroy: function(item){
     if ( !this.filter(item) ) return;
-    if (item.id)
+    if (item.id) {
       this.findItem(item.id).remove();
-    else
+      this.trigger("render");
+    } else {
       this.render();
+    }
   }
 });
 
-jQuery.fn.item = function(){
-  var id = this.data("id"),
-      klass = this.data("klass");
-  if ( !id || !klass ) return;
-  return(klass.find(id));
+SuperConnect.fn.setupEvents([
+  "beforeRender", "afterRender"
+]);
+
+(function($){
+
+$.fn.item = function(){
+  var element = this.hasClass("connect-item") ? 
+                this : this.parents(".connect-item");
+  
+  var id = element.data("id"),
+      klass = element.data("klass");
+  
+  if ( id == undefined || klass == undefined ) return;
+  return(eval(klass).find(id));
 };
+
+$.fn.connect = function(klass, options){
+  return(new SuperConnect($(this), klass, options));
+};
+
+})(jQuery);

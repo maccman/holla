@@ -105,7 +105,7 @@
   };
     
   state.setup(function(){    
-    this.connector = new SuperConnect(ChannelActivity);
+    this.connector = this.items.connect(ChannelActivity);
         
     this.connector.filter = this.proxy(function(i){ 
       return(i.channel_id == this.current.id);
@@ -145,9 +145,7 @@
       if ( !this.filter(item) ) return;
       var element = this.findItem(item.id);
       this.builder.call(element, element, item);
-    }, this.connector);
-    
-    this.connector.setElement(this.items);
+    }, this.connector);    
   });
   
   state.afterEnter(function(){

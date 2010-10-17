@@ -44,5 +44,6 @@ class User < ActiveRecord::Base
   serialize_options do
     only :id, :email
     only :first_name, :last_name
+    methods :name
   end
 end
