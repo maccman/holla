@@ -3,6 +3,7 @@
 Holla is a group chat app. The UI is built in a RIA fashion - i.e. is totally asynchronous and super fast. I've open sourced it for a book I'm writing on building Rich Internet Applications with JavaScript.
 
 Good examples for:
+
 * CSS3 theming (inspired by http://jquerymobile.com)
 * SuperApp/SuperModel JS frontend
 * Less
