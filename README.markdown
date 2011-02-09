@@ -9,9 +9,8 @@ Good examples for:
 * Less
 * Sprockets
 * Juggernaut 2
+* Redis models
 * Async uploads with progress
-
-Try it out in your browser (Chrome optimized) - [http://getholla.com](http://getholla.com)
 
 ![Screenshot](http://cl.ly/2PNL/content)
 

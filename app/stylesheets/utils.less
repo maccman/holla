@@ -20,6 +20,7 @@ Usage:
   background: @fc;
   background: -webkit-gradient(linear, left top, left bottom, from(@fc), to(@tc));
   background: -moz-linear-gradient(top, @fc, @tc);
+  background: linear-gradient(top, @fc, @tc);
 }
 
 /* Horizontal Background Gradient */
@@ -27,23 +28,25 @@ Usage:
   background: @fc;
   background: -webkit-gradient(linear, left top, right top, from(@fc), to(@tc));
   background: -moz-linear-gradient(left, @fc, @tc);
+  background: linear-gradient(left, @fc, @tc);
 }
 
 .box-shadow (@h: 0px, @v: 0px, @b: 4px, @c: #333) {
-  box-shadow: @h @v @b @c;
   -moz-box-shadow: @h @v @b @c;
   -webkit-box-shadow: @h @v @b @c;
+  box-shadow: @h @v @b @c;
 }
 
 .inset-box-shadow (@h: 0px, @v: 0px, @b: 4px, @c: #333) {
-  box-shadow: inset @h @v @b @c;
   -moz-box-shadow: inset @h @v @b @c;
   -webkit-box-shadow: inset @h @v @b @c;
+  box-shadow: inset @h @v @b @c;
 }
 
 .box-flex (@s: 0) {
   -webkit-box-flex: @s;
   -moz-box-flex: @s;
+  box-flex: @s;
 }
 
 .hbox () {
@@ -55,7 +58,7 @@ Usage:
   display: -moz-box;
   -moz-box-orient: horizontal;
   -moz-box-align: stretch;
-  -moz-box-pack: left;
+  -moz-box-pack: left;  
 }
 
 .vbox () {
@@ -69,7 +72,7 @@ Usage:
 }
 
 .border-box () {
-  box-sizing: border-box;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
