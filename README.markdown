@@ -12,7 +12,7 @@ Good examples for:
 * Redis models
 * Async uploads with progress
 
-![Screenshot](https://lh4.googleusercontent.com/_IH1OempnqUc/TVIuZPoJyOI/AAAAAAAABDI/cmjFm38svH0/s400/Screen%20shot%202011-02-09%20at%2013.03.26.png)
+![Screenshot](https://lh4.googleusercontent.com/_IH1OempnqUc/TVIuZPoJyOI/AAAAAAAABDI/cmjFm38svH0/s640/Screen%20shot%202011-02-09%20at%2013.03.26.png)
 
 # Prerequisites
 
