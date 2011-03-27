@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Holla</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= csrf_meta_tag %>
+  <%= meta_tag "handle", current_user %>
+  <%= javascript_include_tag :juggernaut, "application" %>
+  <script type="text/javascript" charset="utf-8">
+    jQuery(function($){
+      Message.refresh(<%=raw @messages.to_json %>);
+      Channel.refresh(<%=raw @channels.to_json %>);
+    });
+  </script>
+</head>
+<body>
+  <header id="title">
+    <h1>Holla</h1>
+    
+    <input type="search" results="0" incremental="true" placeholder="Search">
+  </header>
+  
+  <div id="wrapper">
+    <div id="sidebar">
+      <h3>Channels</h3>
+      <ul id="channels">
+      </ul>
+    
+      <h3>Options</h3>
+      <ul id="options">
+        <li data-name="settings">Settings</li>
+        <li data-name="profile">Profile</li>
+      </ul>
+    </div>
+    
+    <div class="vdivide"></div>
+  
+    <div id="content">
+      <div id="messages">
+        <ul class="items">
+        </ul>
+        
+        <div class="new">
+          <textarea></textarea>
+          <button>Send</button>
+        </div>
+      </div>
+      
+      <div id="searches">
+        <h2>Search results: <span class="query"></span></h2>
+        <ul class="items"></ul>
+      </div>
+      
+      <div id="settings">
+        <h1>Settings</h1>
+      </div>
+    </div>
+  </div>
+  
+  <%= script_template "message" %>
+  <%= script_template "channels" %>
+  <%= script_template "search" %>
+</body>
+</html>

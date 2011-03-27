@@ -1,6 +1,6 @@
 development:
   adapter: mysql2
-  database: holla_development
+  database: holla2_development
   username: root
   password:
   pool: 5
@@ -8,7 +8,7 @@ development:
 
 test:
   adapter: mysql2
-  database: holla_test
+  database: holla2_test
   username: root
   password:
   pool: 5
@@ -16,7 +16,7 @@ test:
 
 production:
   adapter: mysql2
-  database: holla_production
+  database: holla2_production
   username: root
   password:
   pool: 5

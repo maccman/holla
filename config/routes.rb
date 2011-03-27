@@ -1,4 +1,4 @@
-Holla::Application.routes.draw do
+Holla2::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -16,12 +16,12 @@ Holla::Application.routes.draw do
   # Sample resource route with options:
   #   resources :products do
   #     member do
-  #       get :short
-  #       post :toggle
+  #       get 'short'
+  #       post 'toggle'
   #     end
   #
   #     collection do
-  #       get :sold
+  #       get 'sold'
   #     end
   #   end
 
@@ -35,7 +35,7 @@ Holla::Application.routes.draw do
   #   resources :products do
   #     resources :comments
   #     resources :sales do
-  #       get :recent, :on => :collection
+  #       get 'recent', :on => :collection
   #     end
   #   end
 
@@ -48,42 +48,31 @@ Holla::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
+  # root :to => "welcome#index"
+
   # See how all your routes lay out with "rake routes"
-  
-  resources :user_sessions
-  
-  resources :users do
-    get :current, :on => :collection
-    get :avatar, :on => :member
-  end
-  
-  resources :ria, :controller => "ria" do
-    get :loader, :on => :collection
-    post :rpc, :on => :collection
-  end
-  
-  resources :settings do
-    get  :connect, :on => :member
-    post :connect, :on => :member
-    post :disconnect, :on => :member
-  end
-  
-  resources :channels
-  
-  match "/connect/:id" => "settings#connect", :as => :connect
-  
-  match "/assets/:id" => "assets#update"
-  
-  match "/login" => "user_sessions#new", :as => :login
-  match "/logout" => "user_sessions#destroy", :as => :logout
-  match "/signup" => "users#new"
-  match "/register" => "users#new"
-  
-  match "/pages/:action" => "pages"
-  
-  root :to => "pages#index"
-  
+
   # This is a legacy wild controller route that's not recommended for RESTful applications.
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
+  
+  resources :messages do
+    member do
+      post "create"
+    end
+  end
+  
+  resources :channels do
+    member do
+      post "create"
+    end
+  end
+  
+  resources :app
+  
+  match "/auth/twitter/callback" => "authorize#create"
+  match "/auth/failure" => "authorize#failure"
+  match "/authorize" => redirect("/auth/twitter")
+  
+  root :to => "app#index"
 end

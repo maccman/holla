@@ -1,19 +1,17 @@
-var Channel = SuperModel.setup("Channel");
-Channel.attributes = ["name"];
+var Channel = exports = Spine.Model.setup("Channel", ["name"]);
 
-Channel.include(SuperModel.GUID);
+Channel.extend(Spine.Model.Ajax);
 
 Channel.include({
-  getLink: function(){
-    return(Rails.app_site + "/connect/" + this.id);
-  },
-    
-  connect: function(){
-    jQuery.post("/settings/" + this.id + "/connect");
+  messages: function(){
+    var channel_id = this.id;
+    return Message.select(function(m){ 
+      return m.channel_id == channel_id; 
+    });
   },
   
-  disconnect: function(){
-    jQuery.post("/settings/" + this.id + "/disconnect");
-    this.destroy();
+  validate: function(){
+    if (!this.name)
+      return "name is required";
   }
 });

@@ -76,3 +76,15 @@ Usage:
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+
+.transition (@s: 0.3s, @o: opacity, @t: linear) {
+  -webkit-transition: @s @o @t;
+  -moz-transition: @s @o @t;
+  transition: @s @o @t;
+}
+
+.ellipsis () {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space:nowrap;
+}

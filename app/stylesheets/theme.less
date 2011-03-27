@@ -67,23 +67,19 @@ header {
   display: block;
 }
 
-#title {
-  border-bottom: 1px solid #535353;
-  overflow: hidden;
-  height: 50px;
+.cta {
+  padding: 3px 7px;
+  color: #FFF;
+  font-weight: bold;
   
-  .vbg-gradient(#575859, #272425);
-  .inset-box-shadow(0, 1px, 1px, #000);
-}
-
-#title h1 {
-  color: #FFF;
-  text-shadow: 0 1px 1px #000;
-}
-
-#title h1 a {
-  color: #FFF;
-  text-decoration: none;
+  border: 2px solid #FFF;  
+  .border-radius(30px);
+  
+  .box-shadow(0, 0, 2px, #7F7F7F);
+  text-shadow: 0 -1px 1px #7F7F7F;
+  
+  .vbg-gradient(#58A7D5, #3995CC);
+  background: -webkit-gradient(linear, left top, left bottom, from(#58A7D5), color-stop(0.5, #58A7D5), color-stop(0.5, #3995CC), to(#3995CC));
 }
 
 .panel {
@@ -119,8 +115,12 @@ header {
 
 button {
   border: 1px solid #BBBBBB;
-  color: #000;
-  font-size: 17px;
+  font-weight: bold;
+  text-shadow: 0 1px 1px #FFF;
+  font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
+  font-size: 14px;
+  color: #363636;
+
   padding: 6px 10px;
   margin: 1px 1px 1px 0;
   outline: none;
@@ -134,15 +134,22 @@ button {
   }
 }
 
+button.default, .ui-dialog-buttonset button:first-child {
+  color: #FFF;
+  border: 1px solid #3F68A5;
+  
+  text-shadow: 0 -1px 1px #46677F;
+  .vbg-gradient(#7BB5DB, #4775B8);
+  
+  :active, .active {
+    .vbg-gradient(#4775B8, #7BB5DB);
+  }
+}
+
 button.pill {
   -khtml-appearance: none;
   text-align: center;
-  color: #374047;
-  padding: 5px 25px;
-  font-family: Helvetica, Arial, "MS Trebuchet", sans-serif;
-  font-weight: bold;
-  font-size: 15px;
-  text-shadow: 0 1px 1px #F1F1F2;
+
   border: 1px solid #B1B1B1;
   
   .box-shadow(0, 1px, 1px, #FFF);
@@ -181,20 +188,36 @@ input[type="password"] {
   background: -webkit-gradient(linear, left top, left bottom, from(#E6E6E7), color-stop(0.3, #FAFAFA), to(#FAFAFA));  
 }
 
+textarea {
+  .border-radius(10px);
+  height: 70px;
+}
+
+input.plain {
+  -webkit-appearance: searchfield;
+  padding: 5px 7px;
+  color: #000;
+  background: #FFF;
+}
+
 label {
   display: block;
   margin: 0 0 20px 0;
-  overflow: visible;
+  overflow: visible;  
 }
 
 label span {
   display: block;
   margin-bottom: 6px;
   margin-left: -3px;
+  
+  font-weight: bold;
+  font-size: 13px; 
 }
 
 label input {
   font-size: 14px;
+  display: block;
 }
 
 label input[type="checkbox"] {
@@ -207,14 +230,13 @@ label input[type="checkbox"] + span {
   display: inline;
 }
 
-label input {
-  display: block;
-}
-
 label input[type="text"],
 label input[type="password"],
 textarea {
-  width: 200px;
+  width: 220px;  
+  margin: 0 2px 0 0;
+  padding: 4px 8px;
+  .border-box();  
 }
 
 input.dark {
@@ -271,16 +293,51 @@ table {
   }
 }
 
-.ellipsis {
-  text-overflow: ellipsis;
+pre {
+  font-family: Helvetica, Arial;
+}
+
+.ui-dialog {
+  padding: 0;
+
+  .border-radius(10px);
+  .vbg-gradient(#FFF, #E0E0E1);
+  
+  -webkit-box-shadow: inset 0 -1px 1px #FFF, 0px 5px 20px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: inset 0 -1px 1px #FFF, 0px 5px 20px rgba(0, 0, 0, 0.4);
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  height: 25px;
+  line-height: 25px;
   overflow: hidden;
-  white-space:nowrap;
+  text-align: center;
+  color: #FFF;
+  border-bottom: 1px solid #535353;
+  
+  .vbg-gradient(#575859, #272425);
+
+  -webkit-border-radius: 10px 10px 0 0;
+  -moz-border-radius: 10px 10px 0 0;
 }
 
-.left {
-  float: left;
+.ui-dialog .ui-dialog-title {
+  margin: 0;
 }
 
-.right {
-  float: right;
+.ui-dialog .ui-dialog-content {
+  line-height: 1.3em;
+  padding: 15px 10px 10px 15px;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+  border-top: 1px solid #CDCDCC;
+  padding: 9px 0;
+  margin: 0 9px;
+  
+  .inset-box-shadow(0, 1px, 1px, #FCFCFC);
+}
+
+.ui-dialog .ui-dialog-buttonpane button {
+  margin: 0 3px 0 3px;
 }

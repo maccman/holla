@@ -1,5 +1,5 @@
 class JuggernautObserver < ActiveModel::Observer
-  observe :roster, :channel_activity
+  observe :message
     
   def after_create(rec)
     publish(:create, rec)
@@ -15,22 +15,9 @@ class JuggernautObserver < ActiveModel::Observer
   
   protected
     def publish(type, rec)
-      Juggernaut.publish(
-        Array(rec.observer_clients).map {|c| "/observer/#{c}" }, 
-        {
+      Juggernaut.publish("/observer", {
           :type  => type, :id => rec.id, 
           :klass => rec.class.name, :record => rec
-        },
-        :except => current_session_id
-      )
-    end
-    
-    # The client's current Juggernaut sessionID.
-    # We don't want messages generated from clients
-    # to be send back to those clients.
-    def current_session_id
-      return unless UserSession.activated?
-      session = UserSession.find
-      session && session.session_id
+      })
     end
 end

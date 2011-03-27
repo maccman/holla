@@ -10,86 +10,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100907115424) do
-
-  create_table "assets", :force => true do |t|
-    t.string   "data_file_name"
-    t.string   "data_content_type"
-    t.integer  "data_file_size"
-    t.datetime "data_updated_at"
-    t.string   "preview_file_name"
-    t.string   "preview_content_type"
-    t.integer  "preview_file_size"
-    t.datetime "preview_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "creator_id"
-    t.boolean  "uploaded"
-  end
+ActiveRecord::Schema.define(:version => 20110326213742) do
 
   create_table "channels", :force => true do |t|
     t.string   "name"
-    t.string   "creator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "clients", :force => true do |t|
-    t.string   "user_id"
-    t.integer  "access_key_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "comments", :force => true do |t|
-    t.text     "body"
-    t.string   "klass"
-    t.string   "klass_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "comments", ["klass"], :name => "index_comments_on_klass"
-  add_index "comments", ["klass_id"], :name => "index_comments_on_klass_id"
-
-  create_table "emails", :force => true do |t|
-    t.string   "from"
-    t.string   "to"
-    t.string   "subject"
+  create_table "messages", :force => true do |t|
     t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "channel_id", :null => false
+    t.string   "name"
   end
 
-  create_table "user_channels", :force => true do |t|
-    t.string   "channel_id"
-    t.string   "user_id"
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "handle"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.string   "persistence_token"
-    t.datetime "current_login_at"
-    t.string   "current_login_ip"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.string   "single_access_token"
-    t.string   "perishable_token"
-    t.integer  "active_token_id"
-    t.string   "oauth_token"
-    t.string   "oauth_secret"
-    t.boolean  "oauth"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
 end

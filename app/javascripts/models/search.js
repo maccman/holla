@@ -1,32 +1,55 @@
-var Search = SuperModel.setup("Search");
-Search.attributes = ["value", "record"];
+var Search = Spine.Klass.create();
+Search.include(Spine.Events);
 
-Search.extend({
-  search: function(query){
-    this.query = query;
-    this.populate([]);
-    
-    if ( $.isBlank(query) ) return;
-    
-    this.query = this.query.toLowerCase()
-    
-    var items = ChannelActivity.all();
-    var atts  = ["name", "body"];
-    
-    for(var i=0, len = items.length; i < len; i++) {
-      if ( !items[i].data ) continue;
+Search.models = [];
 
-      for (var j=0; j < atts.length; j++) {
-        var value = items[i].data[atts[j]];
-        
-        if ( value && value.toLowerCase().indexOf(this.query) != -1 ) {
-          this.create({
-            value:  value, 
-            record: items[i]
-          });
-          break;
-        }
-      } 
+Search.Model = {
+  extended: function(){
+    Search.models.push(this);
+  }
+};
+
+Search.include({
+  init: function(){
+    this.proxyAll("queryModel", "queryRecord");
+    this.results = [];
+  },
+  
+  query: function(params){
+    this.clear();
+    if ( !params ) return;
+    this.params = params.toLowerCase();
+    this.parent.models.forEach(this.queryModel);
+    this.trigger("change");
+  },
+    
+  clear: function(){
+    this.results = [];
+    this.trigger("change");
+  },
+  
+  each: function(callback){
+    this.results.forEach(callback);
+  },
+  
+  // Private
+  
+  queryModel: function(model){
+    var each  = model.search_each || model.each;
+    each.call(model, this.queryRecord);
+  },
+  
+  queryRecord: function(rec) {
+    var attributes = (rec.search_attributes || rec.attributes).apply(rec);    
+    
+    for (var key in attributes) {      
+      var value = (attributes[key] + "").toLowerCase();
+      
+      if (value.indexOf(this.params) != -1)
+        this.results.push({
+          value:  value,
+          record: rec
+        });
     }
   }
 });
