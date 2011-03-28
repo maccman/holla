@@ -7,4 +7,11 @@ class MessagesController < ApplicationController
     message.save!
     head :ok
   end
+  
+  def update
+    message = Message.find(params[:id])
+    message.name = current_user
+    message.update_attributes!(params)
+    head :ok
+  end
 end

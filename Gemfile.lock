@@ -40,6 +40,8 @@ GEM
     archive-tar-minitar (0.5.2)
     arel (2.0.9)
     builder (2.1.2)
+    carrierwave (0.5.3)
+      activesupport (~> 3.0)
     columnize (0.3.2)
     daemons (1.1.0)
     erubis (2.6.6)
@@ -154,7 +156,7 @@ GEM
     sprockets (1.0.2)
     supermodel (0.1.4)
       activemodel (>= 3.0.0.beta)
-    thin (1.2.10)
+    thin (1.2.11)
       daemons (>= 1.0.9)
       eventmachine (>= 0.12.6)
       rack (>= 1.0.0)
@@ -168,6 +170,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  carrierwave
   juggernaut
   less!
   mysql2

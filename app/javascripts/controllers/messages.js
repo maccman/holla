@@ -1,4 +1,31 @@
 (function($){
+  
+window.MessagesItem = Spine.Controller.create({
+  tag: "li",
+  
+  scoped: ["render", "remove"],
+  
+  template: function(data){
+    return $("#messageTemplate").tmpl(data);
+  },
+  
+  init: function(){
+    this.item.bind("update", this.render);
+    this.item.bind("destroy", this.remove);
+  },
+  
+  render: function(e, item){
+    if (item) this.item = item;
+    var elements = this.template(this.item);
+    this.el.replaceWith(elements);
+    this.el = elements;
+    return this;
+  },
+  
+  remove: function(){
+    this.el.remove();
+  }
+})
 
 window.Messages = Spine.Controller.create({
   elements: {
@@ -11,22 +38,20 @@ window.Messages = Spine.Controller.create({
     "keydown .new textarea": "checkCreate",
   },
   
-  scoped: ["changeChannel", "addOne"],
+  scoped: ["changeChannel", "addNew", "addOne"],
   
   handle: $("meta[name=handle]").attr("content"),
   
-  template: function(data){
-    return $("#messageTemplate").tmpl(data);
-  },
-  
   init: function(){
-    Message.bind("create", this.addOne);
+    Message.bind("create", this.addNew);
   },
   
   render: function(){
-    this.items.html(this.template(this.getItems()));
-    this.scrollToBottom();
-    this.focus();
+    this.addAll();
+    this.delay(function(){
+     this.scrollToBottom();
+     this.focus();
+    });
   },
   
   create: function(){
@@ -79,21 +104,32 @@ window.Messages = Spine.Controller.create({
     );
   },
   
-  addOne: function(e, item){
-    item = item || e;
-    
-    // Message for a different channel
-    if ( !item.channel().eql(this.channel) )
-      return;
-      
+  scroll: function(callback){
     var shouldScroll = this.isScrolledToBottom();
-
-    this.items.append(this.template(item));
-    
+    callback.apply(this);
     if (shouldScroll) 
       this.scrollToBottom();
-      
-    $.playAudio("/audio/new.mp3");
+  },
+  
+  addOne: function(item, audio){    
+    // Message for a different channel
+    if ( !item.forChannel(this.channel) )
+      return;
+
+    var msgItem = MessagesItem.inst({item: item});
+    this.items.append(msgItem.render().el);
+    
+    if (audio) $.playAudio("/audio/new.mp3");
+  },
+  
+  addAll: function(){
+    Message.each(this.addOne);
+  },
+  
+  addNew: function(e, item){
+    this.scroll(function(){
+      this.addOne(item, true);
+    });
   },
   
   getItems: function(){

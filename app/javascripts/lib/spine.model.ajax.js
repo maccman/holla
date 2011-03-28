@@ -50,20 +50,22 @@ Spine.Model.Ajax = {
     this.fetch(this.proxy(function(e){
       ajaxSync(e, "read", this);
     }));
-    
-    this.include({
-      url: function(){
-        var base = getUrl(this.parent);
-        base += (base.charAt(base.length - 1) == "/" ? "" : "/");
-        base += encodeURIComponent(this.id);
-        return base;        
-      }
-    })
-  },
-  
-  url: function() {
-    return "/" + this.name.toLowerCase() + "s"
   }
 };
+
+Spine.Model.extend({
+  url: function() {
+    return "/" + this.name.toLowerCase() + "s"
+  }  
+});
+
+Spine.Model.include({
+  url: function(){
+    var base = getUrl(this.parent);
+    base += (base.charAt(base.length - 1) == "/" ? "" : "/");
+    base += encodeURIComponent(this.id);
+    return base;        
+  }  
+});
 
 })(jQuery);

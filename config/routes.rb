@@ -68,7 +68,10 @@ Holla2::Application.routes.draw do
     end
   end
   
+  resources :assets
+  
   resources :app
+  match "/assets/*:id" => "assets#show"
   
   match "/auth/twitter/callback" => "authorize#create"
   match "/auth/failure" => "authorize#failure"

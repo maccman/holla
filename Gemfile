@@ -13,6 +13,7 @@ gem "juggernaut"
 gem "thin"
 
 gem "omniauth"
+gem "carrierwave"
 
 group :development do
   gem "ruby-debug19", :require => "ruby-debug"

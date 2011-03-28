@@ -17,6 +17,7 @@
 //= require <controllers/sidebar>
 //= require <controllers/searches>
 //= require <controllers/settings>
+//= require <controllers/assets>
 
 jQuery(function($){
 
@@ -35,6 +36,7 @@ window.App = Spine.Controller.create({
     this.sidebar  = Sidebar.inst({el: this.sidebarEl});
     this.searches = Searches.inst({el: this.searchesEl});    
     this.settings = Settings.inst({el: this.settingsEl});
+    this.assets   = Assets.inst({messages: this.messages});
     
     // Activate appropriate view when sidebar is clicked
     this.sidebar.bind("change", this.proxy(function(e, type, item){

@@ -173,22 +173,26 @@ body {
   border-bottom: 1px solid #CDCDCC;
   .box-shadow(0, 1px, 1px, #FCFCFC);
   display: block;
+  overflow: hidden;
   
   .body {
-    display: inline-block;
+    display: block;
+    margin-left: 130px;
+    padding: 10px 15px;
+    
     -webkit-user-select: text;
-    padding: 10px;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);    
   }
   
   .name {
-    .border-box();
-    .ellipsis();
-    width: 130px;
+    display: block;
+    float: left;
+    width: 90px;
     padding: 10px 20px;
-    border-right: 1px solid rgba(0, 0, 0, 0.2);
-    display: inline-block;
+
+    .ellipsis();
     font-weight: bold;
-    text-align: right;
+    text-align: right;    
   }
   
   :last-child {

@@ -43,7 +43,8 @@
       if (!(list  = this._callbacks[ev])) return this;
       
       for (i = 0, l = list.length; i < l; i++)
-        list[i].apply(this, args);
+        if (list[i].apply(this, args) === false)
+          return false;
       return this;
     }
   };
@@ -329,8 +330,8 @@
     save: function(){
       var error = this.validate();
       if (error) {
-        this.trigger("error", error);
-        return false;
+        if ( !this.trigger("error", error) )
+          throw("Validation failed: " + error);
       }
       
       this.trigger("beforeSave");
