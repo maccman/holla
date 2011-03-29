@@ -27,7 +27,6 @@
       <h3>Options</h3>
       <ul id="options">
         <li data-name="settings">Settings</li>
-        <li data-name="profile">Profile</li>
       </ul>
       
       <h3>Search</h3>
@@ -53,13 +52,28 @@
       </div>
       
       <div id="settings">
-        <h1>Settings</h1>
+        <h2>Channels</h2>
+        <ul class="channels">    
+        </ul>
+        
+        <h2>Create Channel</h2>
+        <div class="createChannel">
+          <form>
+            <input type="text" placeholder="Channel name">
+            <button>New Channel</button>
+          </form>
+        </div>
+
+        <h2>Profile</h2>
+
+        <div><%= link_to "Logout", logout_path %></div>
       </div>
     </div>
   </div>
   
   <%= script_template "message" %>
   <%= script_template "channels" %>
+  <%= script_template "edit_channel" %>
   <%= script_template "search" %>
 </body>
 </html>

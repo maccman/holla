@@ -248,3 +248,50 @@ body {
     .inset-box-shadow(0, 0, 10px, #4775B8);
   }  
 }
+
+#settings {  
+}
+
+#settings .channels {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  cursor: pointer;
+  width: 200px;
+  
+  li {
+    position: relative;
+    padding: 2px 0;
+  }
+  
+  .edit { display: none; }
+  .editing .edit { display: block; }
+  .editing .view { display: none; }
+  
+  .destroy {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    background: url(/images/destroy.png) no-repeat center center;
+  }
+
+  li:hover .destroy {
+    display: block;
+  }
+}
+
+#settings h2 {
+  font-size: 23px;
+  padding: 20px 15px;
+  .vbg-gradient(#FCFCFC, #EFEFEF);  
+  .box-shadow(0, 1px, 2px, rgba(0,0,0,0.2));
+}
+
+#settings div {
+  padding: 0 15px;  
+}

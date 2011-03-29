@@ -7,4 +7,8 @@ class AuthorizeController < ApplicationController
   def failure
     raise "OAuth failure - #{params[:message]}"
   end
+  
+  def destroy
+    cookies.delete(:handle)
+  end
 end

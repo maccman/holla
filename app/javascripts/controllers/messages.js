@@ -125,6 +125,7 @@ window.Messages = Spine.Controller.create({
   },
   
   addAll: function(){
+    this.items.empty();
     Message.each(this.addOne);
   },
   
