@@ -30,7 +30,7 @@ window.Assets = Spine.Controller.create({
     
     var message = Message.create({
       name:       this.handle,
-      body:       "Uploading " + file.name + "...",
+      body:       "Uploading " + file.name,
       channel_id: this.messages.channel.id
     });
         

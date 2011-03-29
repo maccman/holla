@@ -1,2 +1,8 @@
 public/uploads
 public/system
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+vendor/bundle
+vendor/gems

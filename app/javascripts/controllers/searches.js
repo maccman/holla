@@ -12,7 +12,7 @@ window.Searches = Spine.Controller.create({
   },
   
   init: function(){
-    this.input = $("#title input[type=search]");
+    this.input = $("#sidebar input[type=search]");
     this.input.keyup(this.query);
     this.model = Search.inst();
     this.model.bind("change", this.render);
