@@ -82,7 +82,9 @@ window.Settings = Spine.Controller.create({
   },
   
   create: function(){
-    Channel.create({name: this.input.val()});
+    var value = this.input.val();
+    if ( !value ) return false;
+    Channel.create({name: value});
     this.input.val("");
     return false;
   }
