@@ -6,10 +6,10 @@ $.fn.item = function(){
 };
 
 $.fn.forItem = function(item){
-  $(this).each(function(){
-    var compare = $(this).data("tmplItem");
+  return this.filter(function(){
+    var compare = $(this).tmplItem().data;
     if (item.eql && item.eql(compare) || item === compare)
-      return $(this);
+      return true;
   });
 };
 

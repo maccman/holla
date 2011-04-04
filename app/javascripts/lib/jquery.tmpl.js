@@ -14,6 +14,7 @@
 		// Returns a template item data structure for a new rendered instance of a template (a 'template item').
 		// The content field is a hierarchical array of strings and nested items (to be
 		// removed and replaced by nodes field of dom elements, once inserted in DOM).
+		
 		var newItem = {
 			data: data || (parentItem ? parentItem.data : {}),
 			_wrap: parentItem ? parentItem._wrap : null,

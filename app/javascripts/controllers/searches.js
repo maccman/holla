@@ -1,8 +1,13 @@
 (function($){
 
 window.Searches = Spine.Controller.create({  
+  elements: {
+    ".items": "items",
+    ".query": "queryEl"
+  },
+  
   events: {
-    "click li": "click"
+    "click .item": "click"
   },
   
   scoped: ["render", "query", "checkActive"],
@@ -19,17 +24,18 @@ window.Searches = Spine.Controller.create({
   },
   
   render: function(){
-    this.el.html(this.template(this.model.results));
+    this.items.html(this.template(this.model.results));
   },
   
   query: function(){
     this.model.query(this.input.val());
+    this.queryEl.text(this.input.val())
     this.active();
   },
     
   click: function(e){
-    var message = $(e.target).item();
-    this.trigger("openChannel", message.channel());
+    var item = $(e.target).item().record.reload();
+    this.App.trigger("change", "channels", item.channel());
   }
 });
 

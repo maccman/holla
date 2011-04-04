@@ -37,23 +37,17 @@ window.App = Spine.Controller.create({
     this.searches = Searches.inst({el: this.searchesEl});    
     this.settings = Settings.inst({el: this.settingsEl});
     this.assets   = Assets.inst({messages: this.messages});
-    
-    // Activate appropriate view when sidebar is clicked
-    this.sidebar.bind("change", this.proxy(function(e, type, item){
-      if (type == "channels") this.messages.changeChannel(item);
-      else if (type == "settings") this.settings.active();
-    }));
-    
+        
     // Make sure only one view is visible
     this.manager = Spine.Controller.Manager.inst();
     this.manager.addAll(this.messages, this.searches, this.settings);
     
     // Remove selected sidebar items when searching
-    this.manager.bind("change", this.proxy(function(e, current){
+    this.manager.bind("change", this.proxy(function(current){
       if (current == this.searches) this.sidebar.deactivate();
     }));
   }
-}).include(Spine.Log).inst();
+}).inst();
 
 });
 

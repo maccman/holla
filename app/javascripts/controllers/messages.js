@@ -14,7 +14,7 @@ window.MessagesItem = Spine.Controller.create({
     this.item.bind("destroy", this.remove);
   },
   
-  render: function(e, item){
+  render: function(item){
     if (item) this.item = item;
     var elements = this.template(this.item);
     this.el.replaceWith(elements);
@@ -46,6 +46,7 @@ window.Messages = Spine.Controller.create({
   
   init: function(){
     Message.bind("create", this.addNew);
+    this.App.bind("change:channels", this.changeChannel);
   },
   
   render: function(){
@@ -129,7 +130,7 @@ window.Messages = Spine.Controller.create({
     Message.each(this.addOne);
   },
   
-  addNew: function(e, item){
+  addNew: function(item){
     this.scroll(function(){
       this.addOne(item, true);
     });

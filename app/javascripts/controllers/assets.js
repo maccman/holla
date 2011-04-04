@@ -39,8 +39,10 @@ window.Assets = Spine.Controller.create({
       
       upload: {
         progress: function(e){
-          // var per = Math.round((e.position / e.total) * 100);
-          // message.updateAttributes({per: per});
+          Spine.Model.noSync(function(){
+            var per = Math.round((e.position / e.total) * 100);
+            message.updateAttributes({per: per});
+          });
         }
       }
     }).success(function(data){

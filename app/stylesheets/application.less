@@ -299,3 +299,65 @@ body {
 #settings div {
   padding: 0 15px;  
 }
+
+#searches {
+  .box-flex(1);
+  .vbox();
+}
+
+#searches .items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  .box-flex(1);
+  overflow: auto;
+  
+  .vbg-gradient(#FCFCFC, #EFEFEF);  
+  color: #373737;
+  text-shadow: 0 1px 1px #FFF;
+}
+
+#searches .item {
+  position: relative;  
+  border-bottom: 1px solid #CDCDCC;
+  .box-shadow(0, 1px, 1px, #FCFCFC);
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  
+  .body {
+    display: block;
+    margin-left: 130px;
+    padding: 10px 15px;
+    
+    -webkit-user-select: text;
+    border-left: 1px solid rgba(0, 0, 0, 0.2);    
+  }
+  
+  .name {
+    display: block;
+    float: left;
+    width: 90px;
+    padding: 10px 20px;
+
+    .ellipsis();
+    font-weight: bold;
+    text-align: right;    
+  }
+  
+  :last-child {
+    border-bottom: 0;
+
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+}
+
+#searches h2 {
+  font-size: 23px;
+  padding: 20px 15px;
+  margin: 0;
+  .vbg-gradient(#FCFCFC, #EFEFEF);  
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+}

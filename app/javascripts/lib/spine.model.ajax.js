@@ -16,7 +16,7 @@ var urlError = function() {
   throw new Error("A 'url' property or function must be specified");
 };
 
-var ajaxSync = function(e, method, record){  
+var ajaxSync = function(method, record){  
   
   var params = {
     type:          methodMap[method],
@@ -24,6 +24,8 @@ var ajaxSync = function(e, method, record){
     dataType:     "json",
     processData:  false
   };
+        
+  if (Spine.Model._noSync) return;
     
   params.url = getUrl(record);
   if (!params.url) throw("Invalid URL");
@@ -43,12 +45,11 @@ var ajaxSync = function(e, method, record){
   $.ajax(params);
 };
 
-
 Spine.Model.Ajax = {
   extended: function(){    
     this.sync(ajaxSync);
-    this.fetch(this.proxy(function(e){
-      ajaxSync(e, "read", this);
+    this.fetch(this.proxy(function(){
+      ajaxSync("read", this);
     }));
   }
 };
@@ -56,7 +57,13 @@ Spine.Model.Ajax = {
 Spine.Model.extend({
   url: function() {
     return "/" + this.name.toLowerCase() + "s"
-  }  
+  },
+  
+  noSync: function(callback){
+    Spine.Model._noSync = true;
+    callback.apply(callback, arguments);
+    Spine.Model._noSync = false;
+  }
 });
 
 Spine.Model.include({

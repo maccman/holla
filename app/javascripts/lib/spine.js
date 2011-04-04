@@ -7,7 +7,7 @@
     Spine = this.Spine = {};
   }
   
-  Spine.version = "0.0.1";
+  Spine.version = "0.0.2";
   
   var $ = this.jQuery || this.Zepto;
   
@@ -18,7 +18,7 @@
   var dupHash = function(hash){
     var result = {};
     for(var name in hash)
-      result[name] = hash[name]
+      result[name] = hash[name];
     return result;
   };
   
@@ -28,7 +28,7 @@
       var calls = this._callbacks || (this._callbacks = {});
       
       for (var i=0; i < evs.length; i++)
-        (this._callbacks[evs[i]] || (this._callbacks[evs[i]] = [])).push(callback)
+        (this._callbacks[evs[i]] || (this._callbacks[evs[i]] = [])).push(callback);
 
       return this;
     },
@@ -36,8 +36,7 @@
     trigger: function() {
       var args = makeArray(arguments);
       var ev   = args.shift();
-      args.splice(0, 0, {type: ev, target: this});
-      
+            
       var list, calls, i, l;
       if (!(calls = this._callbacks)) return this;
       if (!(list  = this._callbacks[ev])) return this;
@@ -45,6 +44,26 @@
       for (i = 0, l = list.length; i < l; i++)
         if (list[i].apply(this, args) === false)
           return false;
+      return this;
+    },
+    
+    unbind: function(ev, callback){
+      if ( !ev ) {
+        this._callbacks = {};
+        return this;
+      }
+      
+      var list, calls, i, l;
+      if (!(calls = this._callbacks)) return this;
+      if (!(list  = this._callbacks[ev])) return this;
+      
+      for (i = 0, l = list.length; i < l; i++) {
+        if (callback === list[i]) {
+          list.splice(i, 1);
+          break;
+        }
+      }
+        
       return this;
     }
   };
@@ -57,7 +76,7 @@
     log: function(){
       if ( !this.trace ) return;
       if (typeof console == "undefined") return;
-      var args = $.makeArray(arguments);
+      var args = makeArray(arguments);
       if (this.logPrefix) args.unshift(this.logPrefix);
       console.log.apply(console, args);
       return this;
@@ -88,7 +107,7 @@
       var object = Object.create(this);
       object.parent    = this;
       object.prototype = object.fn = Object.create(this.prototype);
-            
+
       if (include) object.include(include);
       if (extend)  object.extend(extend);
       
@@ -170,9 +189,15 @@
      this.records = {};
      this.attributes = [];
      
-     this.bind("create update destroy", function(e, record){
-       this.trigger("change", e.type, record);
-     });
+     this.bind("create",  this.proxy(function(record){ 
+       this.trigger("change", "create", record);
+     }));
+     this.bind("update",  this.proxy(function(record){ 
+       this.trigger("change", "update", record);
+     }));
+     this.bind("destroy", this.proxy(function(record){ 
+       this.trigger("change", "destroy", record);
+     }));
    },
 
    find: function(id){
@@ -191,12 +216,13 @@
 
    refresh: function(values){
      this.records = {};
-
+     
      for (var i=0, il = values.length; i < il; i++) {    
        var record = this.inst(values[i]);
        record.newRecord = false;
        this.records[record.id] = record;
      }
+     
      this.trigger("refresh");
    },
 
@@ -277,24 +303,30 @@
    fetch: function(callback){
      callback ? this.bind("fetch", callback) : this.trigger("fetch");
    },
+   
+   toJSON: function(){
+     return this.recordsValues();
+   },
 
    // Private
 
    recordsValues: function(){
-     var result = []
+     var result = [];
      for (var key in this.records)
-       result.push(this.records[key])
+       result.push(this.records[key]);
      return result;
    },
 
    dupArray: function(array){
-     return array.map(function(item){
-       return item.dup();
-     });
+     var result = [];
+     for (var i=0; i < array.length; i++)
+      result.push(array[i].dup());
+     return result;
    }
   });
 
   Model.include({
+    model: true,
     newRecord: true,
 
     init: function(atts){
@@ -356,7 +388,9 @@
     },
 
     dup: function(){
-      return Object.create(this);
+      var result = this.parent.inst(this.attributes());
+      result.newRecord = this.newRecord;
+      return result;
     },
 
     reload: function(){
@@ -375,22 +409,18 @@
       this.trigger("update");
     },
 
-    generateID: function(){
-      return Spine.guid();
-    },
-
     create: function(){
       this.trigger("beforeCreate");
-      if ( !this.id ) this.id = this.generateID();
+      if ( !this.id ) this.id = Spine.guid();
       this.newRecord = false;
       this.parent.records[this.id] = this.dup();
       this.trigger("create");
     },
     
     bind: function(events, callback){
-      this.parent.bind(events, this.proxy(function(e, record){
+      this.parent.bind(events, this.proxy(function(record){
         if ( record && this.eql(record) )
-          callback.apply(this, arguments)
+          callback.apply(this, arguments);
       }));
     },
     
@@ -458,5 +488,13 @@
     }
   });
   
-  Controller.include(Events);  
+  Controller.include(Events);
+  Controller.include(Log);
+  
+  Spine.App = Spine.Controller.create({
+    create: function(properties){
+      this.parent.include(properties);
+    }
+  }).inst();
+  Spine.Controller.fn.App = Spine.App;
 })();

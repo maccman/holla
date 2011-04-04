@@ -9,6 +9,17 @@ Search.Model = {
   }
 };
 
+Search.Record = Spine.Klass.create({
+  init: function(value, record){
+    this.value  = value;
+    this.record = record;
+  },
+  
+  reload: function(){
+    return this;
+  }
+});
+
 Search.include({
   init: function(){
     this.proxyAll("queryModel", "queryRecord");
@@ -39,17 +50,14 @@ Search.include({
     each.call(model, this.queryRecord);
   },
   
-  queryRecord: function(rec) {
-    var attributes = (rec.search_attributes || rec.attributes).apply(rec);    
+  queryRecord: function(record) {
+    var attributes = (record.search_attributes || record.attributes).apply(record);
     
     for (var key in attributes) {      
       var value = (attributes[key] + "").toLowerCase();
       
       if (value.indexOf(this.params) != -1)
-        this.results.push({
-          value:  value,
-          record: rec
-        });
+        this.results.push(Search.Record.inst(value, record));
     }
   }
 });

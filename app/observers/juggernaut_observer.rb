@@ -1,5 +1,5 @@
-class JuggernautObserver < ActiveModel::Observer
-  observe :message
+class JuggernautObserver < ActiveRecord::Observer
+  observe :message, :channel
     
   def after_create(rec)
     publish(:create, rec)
@@ -16,8 +16,8 @@ class JuggernautObserver < ActiveModel::Observer
   protected
     def publish(type, rec)
       Juggernaut.publish("/observer", {
-          :type  => type, :id => rec.id, 
-          :klass => rec.class.name, :record => rec
+        :type  => type, :id => rec.id, 
+        :klass => rec.class.name, :record => rec
       })
     end
 end

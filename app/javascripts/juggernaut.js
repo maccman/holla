@@ -23,7 +23,11 @@ jQuery(function($){
     	this.socket.on("connect", this.connect);
     	this.socket.on("disconnect", this.disconnect);
     	this.socket.on("reconnect", this.reconnect);
-    	this.socket.subscribe("/observer", this.process)
+    	this.socket.subscribe("/observer", this.process);
+    	
+    	$("body").bind("ajaxSend", this.proxy(function(e, xhr){
+        xhr.setRequestHeader("X-Session-ID", this.socket.sessionID);
+      }));
     },
     
     connect: function(){
@@ -41,9 +45,16 @@ jQuery(function($){
     },
     
     process: function(msg){
+      Spine.Model.noSync(this.proxy(function(){
+        this.processWithoutSync(msg);
+      }));
+    },
+    
+    processWithoutSync: function(msg){
       this.log("process", msg);
       
       var klass = eval(msg.klass);
+      
       switch(msg.type) {
         case "create":
           if ( !klass.exists(msg.record.id) )
@@ -62,8 +73,8 @@ jQuery(function($){
   });
   
   // Add logging
-  JuggernautApp.fn.logPrefix = "(Juggernaut)";
   JuggernautApp.include(Spine.Log);
+  JuggernautApp.fn.logPrefix = "(Juggernaut)";
 
-  window.App.Juggernaut = new JuggernautApp;
+  window.App.Juggernaut = JuggernautApp.inst();
 });

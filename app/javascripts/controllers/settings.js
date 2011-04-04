@@ -40,7 +40,7 @@ var Channels = Spine.Controller.create({
     if (e.keyCode == 13) e.target.blur();
   },
   
-  close: function(e){
+  close: function(){
     this.el.removeClass("editing");
     this.item.updateAttributes({name: this.input.val()});
   },
@@ -52,7 +52,7 @@ var Channels = Spine.Controller.create({
   destroy: function(){
     this.item.destroy();
   }
-})
+});
 
 window.Settings = Spine.Controller.create({
   elements: {
@@ -64,15 +64,17 @@ window.Settings = Spine.Controller.create({
     "submit .createChannel form": "create"
   },
   
-  scoped: ["addAll", "addOne"],
+  scoped: ["addAll", "addOne", "active"],
   
   init: function(){
     Channel.bind("refresh", this.addAll);
     Channel.bind("create", this.addOne);
+    
+    this.App.bind("change:settings", this.active);
   },
   
-  addOne: function(e, item){
-    var channel = Channels.inst({item: item || e});
+  addOne: function(item){
+    var channel = Channels.inst({item: item});
     this.channelsEl.append(channel.render().el);
   },
   
