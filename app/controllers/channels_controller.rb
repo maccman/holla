@@ -2,6 +2,11 @@ class ChannelsController < ApplicationController
   before_filter :require_user
   before_filter :find_channel, :only => [:update, :destroy]
   
+  def index
+    @channels = Channel.all
+    render :json => @channels
+  end
+  
   def create
     Channel.create!(params)
     head :ok

@@ -6,12 +6,6 @@
   <%= csrf_meta_tag %>
   <%= meta_tag "handle", current_user %>
   <%= javascript_include_tag :juggernaut, "application" %>
-  <script type="text/javascript" charset="utf-8">
-    jQuery(function($){
-      Message.refresh(<%=raw @messages.to_json %>);
-      Channel.refresh(<%=raw @channels.to_json %>);
-    });
-  </script>
 </head>
 <body>
   <header id="title">

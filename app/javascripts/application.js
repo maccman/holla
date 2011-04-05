@@ -46,6 +46,9 @@ window.App = Spine.Controller.create({
     this.manager.bind("change", this.proxy(function(current){
       if (current == this.searches) this.sidebar.deactivate();
     }));
+    
+    Message.fetch();
+    Channel.fetch();
   }
 }).inst();
 

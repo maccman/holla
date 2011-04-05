@@ -1,6 +1,11 @@
 class MessagesController < ApplicationController
   before_filter :require_user
   
+  def index
+    @messages = Message.all
+    render :json => @messages
+  end
+  
   def create
     message = Message.new(params)
     message.name = current_user
