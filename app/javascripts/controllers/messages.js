@@ -40,7 +40,7 @@ window.Messages = Spine.Controller.create({
     "keydown .new textarea": "checkCreate",
   },
   
-  scoped: ["changeChannel", "addNew", "addOne"],
+  scoped: ["changeChannel", "addNew", "addOne", "render"],
   
   handle: $("meta[name=handle]").attr("content"),
   
