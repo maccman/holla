@@ -23,8 +23,7 @@ Good examples for:
 # Installation
 
 * bundle install
-* rake db:create
-* cat db/development_structure.sql | rails dbconsole
+* rake db:migrate
 * rails server thin
 * start the Juggernaut server - [http://github.com/maccman/juggernaut](http://github.com/maccman/juggernaut)
 

@@ -8,7 +8,7 @@ gem "rack-sprockets"
 gem "yui-compressor"
 gem "supermodel"
 
-gem "mysql2"
+gem "sqlite3"
 gem "juggernaut"
 gem "thin"
 
