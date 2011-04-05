@@ -46,6 +46,7 @@ window.Messages = Spine.Controller.create({
   
   init: function(){
     Message.bind("create", this.addNew);
+    Message.bind("refresh", this.render);
     this.App.bind("change:channels", this.changeChannel);
   },
   
