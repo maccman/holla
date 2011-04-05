@@ -18,7 +18,6 @@ Good examples for:
 * Ruby 1.9.2
 * Bundler
 * Redis
-* Mysql
 
 # Installation
 
