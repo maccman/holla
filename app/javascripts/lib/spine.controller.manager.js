@@ -1,6 +1,6 @@
 (function(Spine, $){
 
-var Manager = Spine.Controller.Manager = Spine.Klass.create();
+var Manager = Spine.Controller.Manager = Spine.Class.create();
 Manager.include(Spine.Events);
 
 Manager.include({

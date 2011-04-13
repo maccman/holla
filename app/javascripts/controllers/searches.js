@@ -10,7 +10,7 @@ window.Searches = Spine.Controller.create({
     "click .item": "click"
   },
   
-  scoped: ["render", "query", "checkActive"],
+  proxied: ["render", "query", "checkActive"],
   
   template: function(data){
     return $("#searchTemplate").tmpl(data);

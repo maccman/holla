@@ -3,7 +3,7 @@
 var Channels = Spine.Controller.create({
   tag: "li",
   
-  scoped: ["render", "remove"],
+  proxied: ["render", "remove"],
   
   events: {
     "click    .destroy": "destroy",
@@ -64,7 +64,7 @@ window.Settings = Spine.Controller.create({
     "submit .createChannel form": "create"
   },
   
-  scoped: ["addAll", "addOne", "active"],
+  proxied: ["addAll", "addOne", "active"],
   
   init: function(){
     Channel.bind("refresh", this.addAll);

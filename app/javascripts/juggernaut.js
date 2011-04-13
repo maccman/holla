@@ -3,7 +3,7 @@
 jQuery(function($){
   if (typeof Juggernaut == "undefined") return;
   
-  var JuggernautApp = Spine.Klass.create({
+  var JuggernautApp = Spine.Class.create({
     init: function(){
       this.socket = new Juggernaut;
       this.offline = $("<div></div>")

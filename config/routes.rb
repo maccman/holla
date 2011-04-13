@@ -56,21 +56,11 @@ Holla2::Application.routes.draw do
   # Note: This route will make all actions in every controller accessible via GET requests.
   # match ':controller(/:action(/:id(.:format)))'
   
-  resources :messages do
-    member do
-      post "create"
-    end
-  end
-  
-  resources :channels do
-    member do
-      post "create"
-    end
-  end
-  
-  resources :assets
-  
+  resources :messages
+  resources :channels
+  resources :assets  
   resources :app
+  
   match "/assets/*:id" => "assets#show"
   
   match "/auth/twitter/callback" => "authorize#create"

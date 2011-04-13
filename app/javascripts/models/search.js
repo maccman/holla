@@ -1,4 +1,4 @@
-var Search = Spine.Klass.create();
+var Search = Spine.Class.create();
 Search.include(Spine.Events);
 
 Search.models = [];
@@ -9,7 +9,7 @@ Search.Model = {
   }
 };
 
-Search.Record = Spine.Klass.create({
+Search.Record = Spine.Class.create({
   init: function(value, record){
     this.value  = value;
     this.record = record;

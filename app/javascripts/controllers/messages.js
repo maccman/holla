@@ -3,7 +3,7 @@
 window.MessagesItem = Spine.Controller.create({
   tag: "li",
   
-  scoped: ["render", "remove"],
+  proxied: ["render", "remove"],
   
   template: function(data){
     return $("#messageTemplate").tmpl(data);
@@ -40,7 +40,7 @@ window.Messages = Spine.Controller.create({
     "keydown .new textarea": "checkCreate",
   },
   
-  scoped: ["changeChannel", "addNew", "addOne", "render"],
+  proxied: ["changeChannel", "addNew", "addOne", "render"],
   
   handle: $("meta[name=handle]").attr("content"),
   

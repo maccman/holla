@@ -4,7 +4,7 @@
 (function($){
 
 window.Assets = Spine.Controller.create({
-  scoped: ["drop"],
+  proxied: ["drop"],
   
   handle: $("meta[name=handle]").attr("content"),
   

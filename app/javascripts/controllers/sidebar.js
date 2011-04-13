@@ -9,7 +9,7 @@ window.Sidebar = Spine.Controller.create({
     "#channels": "channels"
   },
   
-  scoped: ["change", "render"],
+  proxied: ["change", "render"],
   
   template: function(item){
     return $("#channelsTemplate").tmpl(item);
