@@ -5,7 +5,7 @@ Manager.include(Spine.Events);
 
 Manager.include({
   addAll: function(){
-    var args = Array.prototype.slice.call(arguments, 0);
+    var args = Spine.makeArray(arguments);
     for (var i=0; i < args.length; i++) this.add(args[i]);
   },
   
@@ -27,7 +27,7 @@ Manager.include({
 
 Spine.Controller.include({
   active: function(callback){
-    $.isFunction(callback) ? this.bind("active", callback) : this.trigger("active");
+    (typeof callback == "function") ? this.bind("active", callback) : this.trigger("active");
     return this;
   },
   
@@ -46,4 +46,4 @@ Spine.Controller.include({
   }
 });
 
-})(Spine, jQuery);
+})(Spine, Spine.$);

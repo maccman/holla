@@ -120,7 +120,7 @@ window.Messages = Spine.Controller.create({
     if ( !item.forChannel(this.channel) )
       return;
 
-    var msgItem = MessagesItem.inst({item: item});
+    var msgItem = MessagesItem.init({item: item});
     this.items.append(msgItem.render().el);
     
     if (audio) $.playAudio("/audio/new.mp3");

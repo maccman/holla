@@ -76,5 +76,5 @@ jQuery(function($){
   JuggernautApp.include(Spine.Log);
   JuggernautApp.fn.logPrefix = "(Juggernaut)";
 
-  window.App.Juggernaut = JuggernautApp.inst();
+  window.App.Juggernaut = JuggernautApp.init();
 });

@@ -1,8 +1,10 @@
-(function($){
+(function(Spine, $){
+  
+var Model = Spine.Model;
 
 var getUrl = function(object){
   if (!(object && object.url)) return null;
-  return $.isFunction(object.url) ? object.url() : object.url;
+  return((typeof object.url == "function") ? object.url() : object.url);
 };
 
 var methodMap = {
@@ -16,7 +18,8 @@ var urlError = function() {
   throw new Error("A 'url' property or function must be specified");
 };
 
-var ajaxSync = function(method, record){  
+var ajaxSync = function(method, record){
+  if (Model._noSync) return;
   
   var params = {
     type:          methodMap[method],
@@ -24,18 +27,26 @@ var ajaxSync = function(method, record){
     dataType:     "json",
     processData:  false
   };
-        
-  if (Spine.Model._noSync) return;
-  
+    
   if (method == "create" && record.model)
     params.url = getUrl(record.parent);
   else
     params.url = getUrl(record);
 
   if (!params.url) throw("Invalid URL");
-  
-  if (method == "create" || method == "update")
-    params.data = JSON.stringify(record);    
+    
+  if (method == "create" || method == "update") {
+    var data = {};
+    
+    if (Model.ajaxPrefix) {
+      var prefix = record.parent.name.toLowerCase();
+      data[prefix] = record;
+    } else {
+      data = record;
+    }
+    
+    params.data = JSON.stringify(data);
+  }
     
   if (method == "read")
     params.success = function(data){
@@ -49,7 +60,7 @@ var ajaxSync = function(method, record){
   $.ajax(params);
 };
 
-Spine.Model.Ajax = {
+Model.Ajax = {
   extended: function(){    
     this.sync(ajaxSync);
     this.fetch(this.proxy(function(){
@@ -58,19 +69,21 @@ Spine.Model.Ajax = {
   }
 };
 
-Spine.Model.extend({
+Model.extend({
+  ajaxPrefix: false,
+  
   url: function() {
     return "/" + this.name.toLowerCase() + "s"
   },
   
   noSync: function(callback){
-    Spine.Model._noSync = true;
+    Model._noSync = true;
     callback.apply(callback, arguments);
-    Spine.Model._noSync = false;
+    Model._noSync = false;
   }
 });
 
-Spine.Model.include({
+Model.include({
   url: function(){
     var base = getUrl(this.parent);
     base += (base.charAt(base.length - 1) == "/" ? "" : "/");
@@ -79,4 +92,4 @@ Spine.Model.include({
   }  
 });
 
-})(jQuery);
+})(Spine, Spine.$);

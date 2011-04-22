@@ -7,19 +7,12 @@
     Spine = this.Spine = {};
   }
   
-  Spine.version = "0.0.2";
+  Spine.version = "0.0.3";
   
-  var $ = this.jQuery || this.Zepto;
+  var $ = Spine.$ = this.jQuery || this.Zepto;
   
-  var makeArray = function(args){
+  var makeArray = Spine.makeArray = function(args){
     return Array.prototype.slice.call(args, 0);
-  };
-  
-  var dupHash = function(hash){
-    var result = {};
-    for(var name in hash)
-      result[name] = hash[name];
-    return result;
   };
   
   var Events = Spine.Events = {
@@ -95,9 +88,8 @@
   var moduleKeywords = ["included", "extended", "setup"];
 
   var Class = Spine.Class = {
-    initializer: function(){},
-    init: function(){},
-
+    inherited: function(){},
+    
     prototype: {
       initializer: function(){},
       init: function(){}
@@ -110,19 +102,18 @@
 
       if (include) object.include(include);
       if (extend)  object.extend(extend);
-      
-      object.initializer.apply(object, arguments);
-      object.init.apply(object, arguments);
+
+      this.inherited(object);
       return object;
     },
 
-    inst: function(){
-      var instance = Object.create(this.prototype);
-      instance.parent = this;
+    init: function(){
+      var initance = Object.create(this.prototype);
+      initance.parent = this;
 
-      instance.initializer.apply(instance, arguments);
-      instance.init.apply(instance, arguments);
-      return instance;
+      initance.initializer.apply(initance, arguments);
+      initance.init.apply(initance, arguments);
+      return initance;
     },
 
     proxy: function(func){
@@ -161,6 +152,7 @@
   
   Class.prototype.proxy    = Class.proxy;
   Class.prototype.proxyAll = Class.proxyAll;
+  Class.inst               = Class.init;
 
   // Models
   
@@ -185,18 +177,18 @@
   };
 
   Model.extend({
-   initializer: function(){
-     this.records = {};
-     this.attributes = [];
+   inherited: function(sub){
+     sub.records = {};
+     sub.attributes = [];
      
-     this.bind("create",  this.proxy(function(record){ 
-       this.trigger("change", "create", record);
+     sub.bind("create",  this.proxy(function(record){ 
+       sub.trigger("change", "create", record);
      }));
-     this.bind("update",  this.proxy(function(record){ 
-       this.trigger("change", "update", record);
+     sub.bind("update",  this.proxy(function(record){ 
+       sub.trigger("change", "update", record);
      }));
-     this.bind("destroy", this.proxy(function(record){ 
-       this.trigger("change", "destroy", record);
+     sub.bind("destroy", this.proxy(function(record){ 
+       sub.trigger("change", "destroy", record);
      }));
    },
 
@@ -218,7 +210,7 @@
      this.records = {};
      
      for (var i=0, il = values.length; i < il; i++) {    
-       var record = this.inst(values[i]);
+       var record = this.init(values[i]);
        record.newRecord = false;
        this.records[record.id] = record;
      }
@@ -287,7 +279,7 @@
    },
 
    create: function(atts){
-     var record = this.inst(atts);
+     var record = this.init(atts);
      record.save();
      return record;
    },
@@ -388,7 +380,7 @@
     },
 
     dup: function(){
-      var result = this.parent.inst(this.attributes());
+      var result = this.parent.init(this.attributes());
       result.newRecord = this.newRecord;
       return result;
     },
@@ -437,6 +429,8 @@
   
   // Controllers
   
+  var eventSplitter = /^(\w+)\s*(.*)$/;
+  
   var Controller = Spine.Controller = Class.create({
     tag: "div",
     
@@ -456,21 +450,17 @@
       if (this.elements) this.refreshElements();
       if (this.proxied) this.proxyAll.apply(this, this.proxied);
     },
-    
-    render: function(){},
-    
+        
     $: function(selector){
       return $(selector, this.el);
     },
-    
-    eventSplitter: /^(\w+)\s*(.*)$/,
-    
+        
     delegateEvents: function(){
       for (var key in this.events) {
         var methodName = this.events[key];
         var method     = this.proxy(this[methodName]);
 
-        var match      = key.match(this.eventSplitter);
+        var match      = key.match(eventSplitter);
         var eventName  = match[1], selector = match[2];
 
         if (selector === '') {
@@ -495,10 +485,11 @@
   Controller.include(Events);
   Controller.include(Log);
   
-  Spine.App = Spine.Controller.create({
+  Spine.App = Controller.create({
     create: function(properties){
       this.parent.include(properties);
+      return this;
     }
-  }).inst();
-  Spine.Controller.fn.App = Spine.App;
+  }).init();
+  Controller.fn.App = Spine.App;
 })();

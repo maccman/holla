@@ -74,7 +74,7 @@ window.Settings = Spine.Controller.create({
   },
   
   addOne: function(item){
-    var channel = Channels.inst({item: item});
+    var channel = Channels.init({item: item});
     this.channelsEl.append(channel.render().el);
   },
   

@@ -32,14 +32,14 @@ window.App = Spine.Controller.create({
   },
   
   init: function(){
-    this.messages = Messages.inst({el: this.messagesEl});
-    this.sidebar  = Sidebar.inst({el: this.sidebarEl});
-    this.searches = Searches.inst({el: this.searchesEl});    
-    this.settings = Settings.inst({el: this.settingsEl});
-    this.assets   = Assets.inst({messages: this.messages});
+    this.messages = Messages.init({el: this.messagesEl});
+    this.sidebar  = Sidebar.init({el: this.sidebarEl});
+    this.searches = Searches.init({el: this.searchesEl});    
+    this.settings = Settings.init({el: this.settingsEl});
+    this.assets   = Assets.init({messages: this.messages});
         
     // Make sure only one view is visible
-    this.manager = Spine.Controller.Manager.inst();
+    this.manager = Spine.Controller.Manager.init();
     this.manager.addAll(this.messages, this.searches, this.settings);
     
     // Remove selected sidebar items when searching
@@ -50,7 +50,7 @@ window.App = Spine.Controller.create({
     Message.fetch();
     Channel.fetch();
   }
-}).inst();
+}).init();
 
 });
 

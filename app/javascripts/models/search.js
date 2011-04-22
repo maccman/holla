@@ -57,7 +57,7 @@ Search.include({
       var value = (attributes[key] + "").toLowerCase();
       
       if (value.indexOf(this.params) != -1)
-        this.results.push(Search.Record.inst(value, record));
+        this.results.push(Search.Record.init(value, record));
     }
   }
 });
