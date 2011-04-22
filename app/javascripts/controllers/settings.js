@@ -50,7 +50,8 @@ var Channels = Spine.Controller.create({
   },
   
   destroy: function(){
-    this.item.destroy();
+    if (confirm("Are you sure you want to delete this channel?"))
+      this.item.destroy();
   }
 });
 

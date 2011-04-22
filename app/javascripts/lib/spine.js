@@ -85,10 +85,11 @@
         return new F();
       };
       
-  var moduleKeywords = ["included", "extended", "setup"];
+  var moduleKeywords = ["included", "extended"];
 
   var Class = Spine.Class = {
     inherited: function(){},
+    created: function(){},
     
     prototype: {
       initializer: function(){},
@@ -103,6 +104,7 @@
       if (include) object.include(include);
       if (extend)  object.extend(extend);
 
+      object.created();
       this.inherited(object);
       return object;
     },
@@ -134,7 +136,7 @@
         if (moduleKeywords.indexOf(key) == -1)
           this.fn[key] = obj[key];
       
-      var included = obj.included || obj.setup;
+      var included = obj.included;
       if (included) included.apply(this);
       return this;
     },
@@ -144,7 +146,7 @@
         if (moduleKeywords.indexOf(key) == -1)
           this[key] = obj[key];
       
-      var extended = obj.extended || obj.setup;
+      var extended = obj.extended;
       if (extended) extended.apply(this);
       return this;
     }
@@ -177,18 +179,18 @@
   };
 
   Model.extend({
-   inherited: function(sub){
-     sub.records = {};
-     sub.attributes = [];
+   created: function(sub){
+     this.records = {};
+     this.attributes = [];
      
-     sub.bind("create",  this.proxy(function(record){ 
-       sub.trigger("change", "create", record);
+     this.bind("create",  this.proxy(function(record){ 
+       this.trigger("change", "create", record);
      }));
-     sub.bind("update",  this.proxy(function(record){ 
-       sub.trigger("change", "update", record);
+     this.bind("update",  this.proxy(function(record){ 
+       this.trigger("change", "update", record);
      }));
-     sub.bind("destroy", this.proxy(function(record){ 
-       sub.trigger("change", "destroy", record);
+     this.bind("destroy", this.proxy(function(record){ 
+       this.trigger("change", "destroy", record);
      }));
    },
 
