@@ -18,15 +18,15 @@ var urlError = function() {
   throw new Error("A 'url' property or function must be specified");
 };
 
-var ajaxSync = function(method, record){
+var ajaxSync = function(method, record, params){
   if (Model._noSync) return;
   
-  var params = {
+  params = $.extend({
     type:          methodMap[method],
     contentType:  "application/json",
     dataType:     "json",
     processData:  false
-  };
+  }, params || {});
     
   if (method == "create" && record.model)
     params.url = getUrl(record.parent);
@@ -40,19 +40,20 @@ var ajaxSync = function(method, record){
     
     if (Model.ajaxPrefix) {
       var prefix = record.parent.name.toLowerCase();
+      data = {};
       data[prefix] = record;
     } else {
       data = record;
     }
-    
+    data = $.extend(data, params.data);
     params.data = JSON.stringify(data);
   }
-    
-  if (method == "read")
+  
+  if (method == "read" && !params.success)
     params.success = function(data){
-      (record.refresh || record.load).call(record, data);
+     (record.refresh || record.load).call(record, data);
     };
-
+  
   params.error = function(xhr, s, e){
     record.trigger("ajaxError", xhr, s, e);
   };
@@ -63,8 +64,8 @@ var ajaxSync = function(method, record){
 Model.Ajax = {
   extended: function(){    
     this.sync(ajaxSync);
-    this.fetch(this.proxy(function(){
-      ajaxSync("read", this);
+    this.fetch(this.proxy(function(params){
+      ajaxSync("read", this, params);
     }));
   }
 };
