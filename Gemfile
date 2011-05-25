@@ -8,6 +8,7 @@ gem "rack-sprockets"
 gem "yui-compressor"
 gem "supermodel"
 
+gem "pg"
 gem "sqlite3"
 gem "juggernaut"
 gem "thin"
