@@ -7,3 +7,4 @@ tmp/**/*
 vendor/bundle
 vendor/gems
 config/database.yml
+*.swp
