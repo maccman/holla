@@ -1,6 +1,4 @@
-<h3>Choose an Authentication Method:</h3>
-<ul>
-<% ["Google", "MyOpenID", "Twitter", "Yahoo"].each do |service| %>
-  <li><%= link_to "#{service}", "/auth/#{service.downcase}" %></li>
+<h3>Please Choose an Authentication Method:</h3>
+<% ["Google", "OpenID", "Twitter", "Yahoo"].each do |service| %>
+  <%= link_to(image_tag("/images/#{service.downcase}_64.png"), "/auth/#{service.downcase}")%>
 <% end %>
-</ul>

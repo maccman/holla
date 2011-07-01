@@ -64,7 +64,7 @@ Holla2::Application.routes.draw do
   match "/assets/*:id" => "assets#show"
   
   match "/authorize" => "authorize#index"
-  ["google", "myopenid", "twitter", "yahoo"].each do |service|
+  ["google", "openid", "twitter", "yahoo"].each do |service|
     match "/auth/#{service}/callback" => "authorize#create"
   end
 
