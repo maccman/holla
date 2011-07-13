@@ -1,4 +1,8 @@
 <li class="item">
   <span class="name">${name || "(unknown)"}</span>
-  <span class="body">${body}</span>
+  {{if isImageUrl(body)}}
+    <span class="body"><img src='${body}' /></span>
+  {{else}}
+    <span class="body">${body}</span>
+  {{/if}}
 </li>
