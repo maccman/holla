@@ -28,7 +28,8 @@ Good examples for:
 # Installation
 
 * bundle install
-* rake db:migrate
+* cp config/database.yml.example config/database.yml
+* bundle exec rake db:migrate
 * rails server thin
 * start the Juggernaut server - [http://github.com/maccman/juggernaut](http://github.com/maccman/juggernaut)
 
