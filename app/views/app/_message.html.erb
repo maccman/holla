@@ -1,8 +1,12 @@
 <li class="item">
   <span class="name">${name || "(unknown)"}</span>
-  {{if isImageUrl(body)}}
-    <span class="body"><img src='${body}' /></span>
-  {{else}}
-    <span class="body">${body}</span>
-  {{/if}}
+  <span class="body">
+    {{if isImageUrl(body)}}
+      <img src='${body}' />
+    {{else}}
+      ${body}
+    {{/if}}
+    <br />
+    <span class="timestamp">${$.timeago(created_at)}</span>
+  </span>
 </li>

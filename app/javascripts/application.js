@@ -54,4 +54,14 @@ window.App = Spine.Controller.create({
 
 });
 
+function isImageUrl(str) {
+  var exts = ["jpg", "jpeg", "gif", "png"];
+  if(str.indexOf("http://") == 0) {
+    for(var x=0; x <= exts.length; x++) { 
+      if (str.indexOf(exts[x]) != -1) {return true;} 
+    }
+  }
+  return false;
+}
+
 //= require <juggernaut>
