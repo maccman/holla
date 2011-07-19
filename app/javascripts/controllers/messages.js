@@ -19,6 +19,7 @@ window.MessagesItem = Spine.Controller.create({
     var elements = this.template(this.item);
     this.el.replaceWith(elements);
     this.el = elements;
+    this.el.autoimage();
     this.el.autolink();
     this.el.mailto();
     return this;

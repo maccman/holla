@@ -5,5 +5,4 @@ class Message < ActiveRecord::Base
   
   attr_accessible :id, :body, :name, :channel_id
   
-  # include ActiveRecord::GUID
 end
