@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/maccman/less.git
+  remote: https://github.com/maccman/less.git
   revision: b25c0c7ed7cabffdbb0146044c36b5deb597399a
   specs:
     less (1.2.21)
@@ -105,6 +105,7 @@ GEM
       oa-more (= 0.2.0)
       oa-oauth (= 0.2.0)
       oa-openid (= 0.2.0)
+    pg (0.11.0)
     polyglot (0.3.1)
     pyu-ruby-sasl (0.0.3.2)
     rack (1.2.2)
@@ -174,6 +175,7 @@ DEPENDENCIES
   juggernaut
   less!
   omniauth
+  pg
   rack-less
   rack-sprockets
   rails (= 3.0.5)

@@ -1,6 +1,6 @@
 class AuthorizeController < ApplicationController
   def create
-    cookies.permanent.signed[:handle] = request.env["omniauth.auth"]["user_info"]["nickname"]
+    cookies.permanent.signed[:handle] = request.env["omniauth.auth"]["user_info"]["name"]
     redirect_to "/"
   end
   

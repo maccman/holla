@@ -1,4 +1,9 @@
 <li class="item">
   <span class="name">${name || "(unknown)"}</span>
-  <span class="body">${body}</span>
+  <span class="body">
+    ${body}
+    {{if created_at}}
+      <br /><span class="timestamp">${$.timeago(created_at)}</span>
+    {{/if}}
+  </span>
 </li>

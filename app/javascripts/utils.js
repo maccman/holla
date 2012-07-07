@@ -13,6 +13,13 @@ $.fn.forItem = function(item){
   });
 };
 
+$.fn.autoimage = function () {
+	return this.each( function(){
+		var re = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>)+(jpg|gif|png))/g;
+		$(this).html( $(this).html().replace(re, '<br /><img src="$1"/>') );
+	});
+};
+
 $.fn.autolink = function () {
 	return this.each( function(){
 		var re = /((http|https|ftp):\/\/[\w?=&.\/-;#~%-]+(?![\w\s?&.\/;#~%"=-]*>))/g;

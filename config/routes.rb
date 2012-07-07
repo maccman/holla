@@ -63,10 +63,13 @@ Holla2::Application.routes.draw do
   
   match "/assets/*:id" => "assets#show"
   
-  match "/auth/twitter/callback" => "authorize#create"
+  match "/authorize" => "authorize#index"
+  ["google", "openid", "twitter", "yahoo"].each do |service|
+    match "/auth/#{service}/callback" => "authorize#create"
+  end
+
   match "/auth/failure" => "authorize#failure"
   match "/logout" => "authorize#destroy", :as => :logout
-  match "/authorize" => redirect("/auth/twitter")
   
   root :to => "app#index"
 end
