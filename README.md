@@ -11,7 +11,7 @@ __[Checkout a live demo here](http://maccman-holla.heroku.com/)__
 Good examples for:
 
 * CSS3 theming (inspired by http://jquerymobile.com)
-* [Spine](http://github.com/maccman/spine) JS frontend
+* [Spine](https://github.com/spine/spine) JS frontend
 * Less
 * Sprockets
 * Juggernaut 2
